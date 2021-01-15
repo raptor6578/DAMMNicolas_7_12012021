@@ -20,7 +20,18 @@ services:
     image: phpmyadmin/phpmyadmin
     restart: always
     ports:
-      - '8080:80'
+      - '8081:80'
     environment:
       PMA_HOST: db
       MYSQL_ROOT_PASSWORD: monsuperpassroot
+
+  web:
+    image: nginx
+    volumes:
+      - ./web/public/dist/groupomania:/usr/share/nginx/html
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
+    ports:
+      - "8080:80"
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=80
