@@ -2,11 +2,10 @@ import express from 'express';
 import bodyParser from "body-parser";
 import sanitize from 'mongo-sanitize';
 import * as dotenv from 'dotenv';
-import { Sequelize } from 'sequelize';
+dotenv.config();
+import db from './db';
 
 import authRoutes from './routes/auth.route';
-
-dotenv.config();
 
 if (process.env.EXPRESS_PORT &&
     process.env.MYSQL_HOST &&
@@ -18,10 +17,6 @@ if (process.env.EXPRESS_PORT &&
 
     const config = {
         expressPort: process.env.EXPRESS_PORT,
-        mysqlHost: process.env.MYSQL_HOST,
-        mysqlDb: process.env.MYSQL_DB,
-        mysqlUsername: process.env.MYSQL_USERNAME,
-        mysqlPassword: process.env.MYSQL_PASSWORD,
         allowOrigin: process.env.ALLOW_ORIGIN
     };
 
@@ -30,16 +25,11 @@ if (process.env.EXPRESS_PORT &&
         console.log(`Le serveur vient de démarrer sur le port ${config.expressPort}.`);
     });
 
-    const sequelize = new Sequelize(config.mysqlDb, config.mysqlUsername, config.mysqlPassword, {
-        host: config.mysqlHost,
-        dialect: 'mysql'
-    });
-
-    sequelize.authenticate()
+    db.authenticate()
         .then(() => {
-            console.log('Connection has been established successfully.');
+            console.log('Connexion à la base de données établie.');
         }).catch((error) => {
-            console.error('Unable to connect to the database:', error);
+            console.error('Impossible de se connecter à la base de données:', error);
         });
 
     app.use(bodyParser.json());

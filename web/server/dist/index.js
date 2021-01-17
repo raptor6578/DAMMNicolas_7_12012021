@@ -22,13 +22,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = __importDefault(require("express"));
-var body_parser_1 = __importDefault(require("body-parser"));
-var mongo_sanitize_1 = __importDefault(require("mongo-sanitize"));
-var dotenv = __importStar(require("dotenv"));
-var sequelize_1 = require("sequelize");
-var auth_route_1 = __importDefault(require("./routes/auth.route"));
+const express_1 = __importDefault(require("express"));
+const body_parser_1 = __importDefault(require("body-parser"));
+const mongo_sanitize_1 = __importDefault(require("mongo-sanitize"));
+const dotenv = __importStar(require("dotenv"));
 dotenv.config();
+const db_1 = __importDefault(require("./db"));
+const auth_route_1 = __importDefault(require("./routes/auth.route"));
 if (process.env.EXPRESS_PORT &&
     process.env.MYSQL_HOST &&
     process.env.MYSQL_DB &&
@@ -36,37 +36,29 @@ if (process.env.EXPRESS_PORT &&
     process.env.MYSQL_PASSWORD &&
     process.env.SECRET_JWT &&
     process.env.ALLOW_ORIGIN) {
-    var config_1 = {
+    const config = {
         expressPort: process.env.EXPRESS_PORT,
-        mysqlHost: process.env.MYSQL_HOST,
-        mysqlDb: process.env.MYSQL_DB,
-        mysqlUsername: process.env.MYSQL_USERNAME,
-        mysqlPassword: process.env.MYSQL_PASSWORD,
         allowOrigin: process.env.ALLOW_ORIGIN
     };
-    var app = express_1.default();
-    app.listen(config_1.expressPort, function () {
-        console.log("Le serveur vient de d\u00E9marrer sur le port " + config_1.expressPort + ".");
+    const app = express_1.default();
+    app.listen(config.expressPort, () => {
+        console.log(`Le serveur vient de démarrer sur le port ${config.expressPort}.`);
     });
-    var sequelize = new sequelize_1.Sequelize(config_1.mysqlDb, config_1.mysqlUsername, config_1.mysqlPassword, {
-        host: config_1.mysqlHost,
-        dialect: 'mysql'
-    });
-    sequelize.authenticate()
-        .then(function () {
-        console.log('Connection has been established successfully.');
-    }).catch(function (error) {
-        console.error('Unable to connect to the database:', error);
+    db_1.default.authenticate()
+        .then(() => {
+        console.log('Connexion à la base de données établie.');
+    }).catch((error) => {
+        console.error('Impossible de se connecter à la base de données:', error);
     });
     app.use(body_parser_1.default.json());
     app.use(body_parser_1.default.urlencoded({ extended: true }));
-    app.use(function (req, res, next) {
-        res.setHeader('Access-Control-Allow-Origin', config_1.allowOrigin);
+    app.use((req, res, next) => {
+        res.setHeader('Access-Control-Allow-Origin', config.allowOrigin);
         res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
         next();
     });
-    app.use(function (req, res, next) {
+    app.use((req, res, next) => {
         req.body = mongo_sanitize_1.default(req.body);
         req.query = mongo_sanitize_1.default(req.query);
         req.params = mongo_sanitize_1.default(req.params);
@@ -76,5 +68,6 @@ if (process.env.EXPRESS_PORT &&
     app.use('/api/auth', auth_route_1.default.router);
 }
 else {
-    console.log("Le fichier de configuration \".env\" se trouvant \u00E0 la racine du projet est incomplet, il doit contenir les champs suivants:\n   EXPRESS_PORT, MYSQL_HOST, MYSQL_DB, MYSQL_USERNAME, MYSQL_PASSWWORD, SECRET_JWT, ALLOW_ORIGIN");
+    console.log(`Le fichier de configuration ".env" se trouvant à la racine du projet est incomplet, il doit contenir les champs suivants:
+   EXPRESS_PORT, MYSQL_HOST, MYSQL_DB, MYSQL_USERNAME, MYSQL_PASSWWORD, SECRET_JWT, ALLOW_ORIGIN`);
 }
