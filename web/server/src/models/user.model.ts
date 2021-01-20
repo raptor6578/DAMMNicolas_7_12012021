@@ -35,7 +35,6 @@ User.init({
 });
 
 User.beforeCreate((user) => {
-
     return bcrypt.hash(user.password, 10)
         .then(hash => {
             user.password = hash;

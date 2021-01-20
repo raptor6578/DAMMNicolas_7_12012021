@@ -1,0 +1,11 @@
+<h1>Inscription</h1>
+<p *ngIf="errorMessage">{{errorMessage}}</p>
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <label for="email">Votre adresse email</label>
+  <input type="email" name="email" id="email" ngModel />
+  <label for="password">Un mot de passe</label>
+  <input type="password" name="password" id="password" ngModel />
+  <label for="confirmPassword">Retapez votre mot de passe</label>
+  <input type="password" name="confirmPassword" id="confirmPassword" ngModel />
+  <button type="submit">Inscription</button>
+</form>

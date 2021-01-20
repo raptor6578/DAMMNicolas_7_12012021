@@ -1,0 +1,8 @@
+<div class="login">
+  <form *ngIf="!connected" (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <input type="email" placeholder="Votre email" name="email" ngModel />
+    <input type="password" placeholder="Votre mot de passe" name="password" ngModel />
+    <button class="login-button">Connexion</button>
+  </form>
+  <button *ngIf="connected" (click)="logout()" class="logout-button">Se deconnecter</button>
+</div>

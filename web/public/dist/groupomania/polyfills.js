@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/raptor/IdeaProjects/DAMMNicolas_7_12012021/public/src/polyfills.ts */"hN/g");
+module.exports = __webpack_require__(/*! /Users/raptor/IdeaProjects/DAMMNicolas_7_12012021/web/public/src/polyfills.ts */"hN/g");
 
 
 /***/ }),
