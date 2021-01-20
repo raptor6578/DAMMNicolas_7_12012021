@@ -10,7 +10,9 @@ import { HeaderComponent } from './layout/header/header.component';
 import { LoginComponent } from './layout/login/login.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {AuthInterceptor} from './middleware/auth-interceptor';
+import { ProfilComponent } from './profil/profil.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import {HttpClientModule} from '@angular/common/http';
     NavComponent,
     HeaderComponent,
     LoginComponent,
-    FooterComponent
+    FooterComponent,
+    ProfilComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,7 @@ import {HttpClientModule} from '@angular/common/http';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -53,4 +53,9 @@ export class AuthService {
     this.connected$.next(false);
   }
 
+  getToken(): string {
+    return this.token;
+  }
+
+
 }
