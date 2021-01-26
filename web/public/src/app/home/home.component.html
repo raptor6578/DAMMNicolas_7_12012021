@@ -1,1 +1,17 @@
 <h1>Réseau Groupomania</h1>
+<div class="home">
+  <form *ngIf="connected">
+    <h3>Publier sur le réseau Groupomania</h3>
+    <label for="publication">Ecrivez quelque chose, lien d'article ou vidéo YouTube</label>
+    <textarea name="publication" id="publication"></textarea>
+    <label for="image" class="label-image">Ajouter une image</label>
+    <input type="file" name="image" id="image" />
+    <button>Publier</button>
+  </form>
+
+  <div class="publication">
+    <span class="author">Publication de <b>DAMM Nicolas</b> posté il y a <b>6 heures</b></span>
+    <span class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus at atque hic omnis qui? Ab eligendi ex exercitationem in nam omnis quae quidem recusandae tenetur velit? Aspernatur facere provident quod!</span>
+  </div>
+
+</div>

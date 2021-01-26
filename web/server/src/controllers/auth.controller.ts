@@ -2,6 +2,7 @@ import express from 'express';
 import UserModel from '../models/user.model';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import Publication from "../models/publication.model";
 
 class AuthController {
     public signup(req: express.Request, res: express.Response) {

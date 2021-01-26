@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {BehaviorSubject} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class AuthService {
   connected$ = new BehaviorSubject<boolean>(false);
   token: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     if (localStorage.getItem('token')) {
       this.token = localStorage.getItem('token');
       this.connected$.next(true);
@@ -51,6 +52,7 @@ export class AuthService {
     delete this.token;
     localStorage.removeItem('token');
     this.connected$.next(false);
+    this.router.navigate(['/']);
   }
 
   getToken(): string {

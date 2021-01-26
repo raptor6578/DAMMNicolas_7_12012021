@@ -1,6 +1,7 @@
 import { DataTypes, Model } from 'Sequelize';
 import sequelize from '../db';
 import bcrypt from 'bcrypt';
+import Publication from './publication.model';
 
 interface IUser {
     email: string
@@ -42,6 +43,17 @@ User.beforeCreate((user) => {
         .catch(err => {
             throw new Error();
         });
+});
+
+Publication.belongsTo(User, {
+    foreignKey: 'id',
+    as: 'users'
+});
+
+User.hasMany(Publication, {
+    foreignKey: 'userId',
+    as: 'Publication',
+    onDelete: 'CASCADE'
 });
 
 User.sync();

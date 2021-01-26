@@ -1,1 +1,21 @@
-<p>profil works!</p>
+<h1>Mon profil</h1>
+<p *ngIf="message">{{message}}</p>
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+  <label for="picture" [style.background-image]="pictureUrl"></label>
+  <input type="file" name="picture" id="picture" (change)="pictureOnChange($event)" ngModel />
+
+  <label for="lastname">Votre nom</label>
+  <input type="text" name="lastname" id="lastname" ngModel />
+  <label for="firstname">Votre prénom</label>
+  <input type="text" name="firstname" id="firstname" ngModel />
+
+  <mat-form-field appearance="fill">
+    <mat-label>Votre date de naissance</mat-label>
+    <input matInput [matDatepicker]="picker" name="dateOfBirth" id="dateOfBirth" [ngModel]="date" />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <button type="submit">Enregistrer</button>
+</form>
