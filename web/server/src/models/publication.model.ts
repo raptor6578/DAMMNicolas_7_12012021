@@ -2,11 +2,12 @@ import { DataTypes, Model } from 'Sequelize';
 import sequelize from '../db';
 
 interface IPublication {
-    userId: number
-    content: string
+    userId: number;
+    content: string;
 }
 
 class Publication extends Model<IPublication> {
+    public id!: number;
     public userId!: number;
     public content!: string;
 }

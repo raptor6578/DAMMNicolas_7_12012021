@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {environment} from '../../environments/environment';
+import {ProfileService} from '../services/profile.service';
 
 @Component({
   selector: 'app-profil',
@@ -9,18 +10,22 @@ import {environment} from '../../environments/environment';
 })
 export class ProfilComponent implements OnInit {
 
-  message: string;
-  date: Date;
-  pictureUrl: string | ArrayBuffer;
-  file: File;
   env = environment;
+  profile;
 
-  constructor() {
-    this.date = new Date(Date.now());
-    this.pictureUrl = `url("${this.env.urlApi}/images/default-profile.png")`;
+  constructor(private profileService: ProfileService) {
+    this.profile = {};
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.profileService.getProfile()
+      .then(profile => {
+        this.profile = profile;
+        if (!this.profile.picture) {
+          this.profile.picture = `url("${this.env.urlApi}/images/default-profile.png")`;
+        }
+      });
+  }
 
   onSubmit(form: NgForm): void {
     console.log(form.value);
@@ -28,12 +33,12 @@ export class ProfilComponent implements OnInit {
 
   pictureOnChange(event): void {
     const files: FileList = event.target.files;
-    this.file = files[0];
+    const file = files[0];
     const reader = new FileReader();
     reader.addEventListener('load', () => {
-      this.pictureUrl = `url("${reader.result}")`;
+      this.profile.picture = `url("${reader.result}")`;
     });
-    reader.readAsDataURL(this.file);
+    reader.readAsDataURL(file);
   }
 
 }

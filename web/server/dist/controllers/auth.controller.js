@@ -8,9 +8,13 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 class AuthController {
     signup(req, res) {
-        if (!req.body.email || !req.body.password) {
+        if (!req.body.email ||
+            !req.body.password ||
+            !req.body.Profile ||
+            !req.body.Profile.lastName ||
+            !req.body.Profile.firstName) {
             res.status(400);
-            return res.json({ message: `Vous devez entrer une adresse email et un mot de passe.` });
+            return res.json({ message: `Vous devez entrer une adresse email, votre nom, prénom, et un mot de passe.` });
         }
         if (req.body.password.length < 8 || req.body.password.length > 30) {
             res.status(400);
@@ -26,10 +30,11 @@ class AuthController {
                 res.status(409);
                 return res.json({ message: `Un compte utilisant l'adresse email que vous avez entré existe déjà.` });
             }
-            const user = new user_model_1.default();
-            user.email = req.body.email;
-            user.password = req.body.password;
-            user.save()
+            user_model_1.default.create({
+                email: req.body.email,
+                password: req.body.password,
+                Profile: req.body.Profile
+            }, { include: 'Profile' })
                 .then(() => {
                 res.status(201);
                 res.json({ message: `Votre compte a bien été enregistré.` });

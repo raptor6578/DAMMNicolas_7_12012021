@@ -2,11 +2,13 @@ import { DataTypes, Model } from 'Sequelize';
 import sequelize from '../db';
 import bcrypt from 'bcrypt';
 import Publication from './publication.model';
+import Profile from './profile.model';
 
 interface IUser {
-    email: string
-    password: string
-    admin?: boolean
+    email: string;
+    password: string;
+    admin?: boolean;
+    Profile?: Profile;
 }
 
 class User extends Model<IUser> {
@@ -14,6 +16,7 @@ class User extends Model<IUser> {
     public email!: string;
     public password!: string;
     public admin!: boolean;
+    public Profile!: Profile
 }
 
 User.init({
@@ -48,6 +51,17 @@ User.beforeCreate((user) => {
 Publication.belongsTo(User, {
     foreignKey: 'id',
     as: 'users'
+});
+
+Profile.belongsTo(User, {
+    foreignKey: 'id',
+    as: 'users'
+});
+
+User.hasOne(Profile, {
+    foreignKey: 'userId',
+    as: 'Profile',
+    onDelete: 'CASCADE'
 });
 
 User.hasMany(Publication, {

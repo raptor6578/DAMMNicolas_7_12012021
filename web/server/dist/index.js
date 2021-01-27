@@ -29,6 +29,7 @@ const dotenv = __importStar(require("dotenv"));
 dotenv.config();
 const db_1 = __importDefault(require("./db"));
 const auth_route_1 = __importDefault(require("./routes/auth.route"));
+const profile_route_1 = __importDefault(require("./routes/profile.route"));
 if (process.env.EXPRESS_PORT &&
     process.env.MYSQL_HOST &&
     process.env.MYSQL_DB &&
@@ -66,6 +67,7 @@ if (process.env.EXPRESS_PORT &&
     });
     app.use('/images', express_1.default.static('images'));
     app.use('/api/auth', auth_route_1.default.router);
+    app.use('/api/profile', profile_route_1.default.router);
 }
 else {
     console.log(`Le fichier de configuration ".env" se trouvant à la racine du projet est incomplet, il doit contenir les champs suivants:

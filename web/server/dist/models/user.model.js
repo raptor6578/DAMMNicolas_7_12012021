@@ -7,6 +7,7 @@ const Sequelize_1 = require("Sequelize");
 const db_1 = __importDefault(require("../db"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const publication_model_1 = __importDefault(require("./publication.model"));
+const profile_model_1 = __importDefault(require("./profile.model"));
 class User extends Sequelize_1.Model {
 }
 User.init({
@@ -39,6 +40,15 @@ User.beforeCreate((user) => {
 publication_model_1.default.belongsTo(User, {
     foreignKey: 'id',
     as: 'users'
+});
+profile_model_1.default.belongsTo(User, {
+    foreignKey: 'id',
+    as: 'users'
+});
+User.hasOne(profile_model_1.default, {
+    foreignKey: 'userId',
+    as: 'Profile',
+    onDelete: 'CASCADE'
 });
 User.hasMany(publication_model_1.default, {
     foreignKey: 'userId',

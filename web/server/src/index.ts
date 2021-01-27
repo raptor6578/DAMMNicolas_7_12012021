@@ -6,6 +6,7 @@ dotenv.config();
 import db from './db';
 
 import authRoutes from './routes/auth.route';
+import profileRoutes from './routes/profile.route';
 
 if (process.env.EXPRESS_PORT &&
     process.env.MYSQL_HOST &&
@@ -51,6 +52,7 @@ if (process.env.EXPRESS_PORT &&
 
     app.use('/images', express.static('images'));
     app.use('/api/auth', authRoutes.router);
+    app.use('/api/profile', profileRoutes.router);
 
 } else {
     console.log(`Le fichier de configuration ".env" se trouvant à la racine du projet est incomplet, il doit contenir les champs suivants:

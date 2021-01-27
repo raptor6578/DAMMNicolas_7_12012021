@@ -2,10 +2,14 @@
 <p *ngIf="errorMessage">{{errorMessage}}</p>
 <form (ngSubmit)="onSubmit(f)" #f="ngForm">
   <label for="email">Votre adresse email</label>
-  <input type="email" name="email" id="email" ngModel />
+  <input type="email" name="email" id="email" required ngModel />
+  <label for="lastName">Votre nom</label>
+  <input type="text" name="lastName" id="lastName" required ngModel />
+  <label for="firstName">Votre prénom</label>
+  <input type="text" name="firstName" id="firstName" required ngModel />
   <label for="password">Un mot de passe</label>
-  <input type="password" name="password" id="password" ngModel />
+  <input type="password" name="password" id="password" required ngModel />
   <label for="confirmPassword">Retapez votre mot de passe</label>
-  <input type="password" name="confirmPassword" id="confirmPassword" ngModel />
+  <input type="password" name="confirmPassword" id="confirmPassword" required ngModel />
   <button type="submit">Inscription</button>
 </form>

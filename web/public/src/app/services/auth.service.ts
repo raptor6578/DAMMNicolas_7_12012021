@@ -19,9 +19,16 @@ export class AuthService {
     }
   }
 
-  signup(email: string, password: string): Promise<{message: string}> {
+  signup(email: string, password: string, lastName: string, firstName: string): Promise<{message: string}> {
     return new Promise((resolve, reject) => {
-      this.http.post(environment.urlApi + '/api/auth/signup', {email, password}).subscribe(
+      this.http.post(environment.urlApi + '/api/auth/signup', {
+        email,
+        password,
+        Profile: {
+          lastName,
+          firstName
+        }
+      }).subscribe(
         (response: {message: string}) => {
           resolve(response);
         },

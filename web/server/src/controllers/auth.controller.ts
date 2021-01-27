@@ -2,13 +2,16 @@ import express from 'express';
 import UserModel from '../models/user.model';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import Publication from "../models/publication.model";
 
 class AuthController {
     public signup(req: express.Request, res: express.Response) {
-        if (!req.body.email || !req.body.password) {
+        if (!req.body.email ||
+            !req.body.password ||
+            !req.body.Profile ||
+            !req.body.Profile.lastName ||
+            !req.body.Profile.firstName) {
             res.status(400);
-            return res.json({message: `Vous devez entrer une adresse email et un mot de passe.` });
+            return res.json({message: `Vous devez entrer une adresse email, votre nom, prénom, et un mot de passe.` });
         }
         if (req.body.password.length < 8 || req.body.password.length > 30) {
             res.status(400);
@@ -24,18 +27,19 @@ class AuthController {
                     res.status(409);
                     return res.json({message: `Un compte utilisant l'adresse email que vous avez entré existe déjà.`});
                 }
-                const user = new UserModel();
-                user.email = req.body.email;
-                user.password = req.body.password;
-                user.save()
-                    .then(() => {
-                        res.status(201);
-                        res.json({message: `Votre compte a bien été enregistré.`});
-                    })
-                   .catch((error) => {
-                        res.status(400);
-                        res.json({message: error});
-                    })
+                UserModel.create({
+                    email: req.body.email,
+                    password: req.body.password,
+                    Profile: req.body.Profile
+                }, {include: 'Profile'})
+                .then(() => {
+                    res.status(201);
+                    res.json({message: `Votre compte a bien été enregistré.`});
+                })
+                .catch((error) => {
+                    res.status(400);
+                    res.json({message: error});
+                });
             }).catch((error) => {
                 res.status(500);
                 res.json({message: error});
