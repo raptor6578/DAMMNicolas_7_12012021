@@ -2,8 +2,8 @@
 <p *ngIf="message">{{message}}</p>
 <form (ngSubmit)="onSubmit(f)" #f="ngForm">
 
-  <label for="picture" [style.background-image]="profile.picture"></label>
-  <input type="file" name="picture" id="picture" (change)="pictureOnChange($event)" ngModel />
+  <label for="image" [style.background-image]="'url(' + profile.picture + ')'"></label>
+  <input type="file" name="image" id="image" accept="image/*" (change)="onFileAdded($event)" />
   <label for="lastName">Votre nom</label>
   <input type="text" name="lastName" id="lastName" [ngModel]="profile.lastName" />
   <label for="firstName">Votre prénom</label>

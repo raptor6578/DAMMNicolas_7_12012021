@@ -12,6 +12,8 @@ export class ProfilComponent implements OnInit {
 
   env = environment;
   profile;
+  message: string;
+  image: File;
 
   constructor(private profileService: ProfileService) {
     this.profile = {};
@@ -21,24 +23,27 @@ export class ProfilComponent implements OnInit {
     this.profileService.getProfile()
       .then(profile => {
         this.profile = profile;
-        if (!this.profile.picture) {
-          this.profile.picture = `url("${this.env.urlApi}/images/default-profile.png")`;
+        if (this.profile.picture) {
+          this.profile.picture = `${this.env.urlApi}/images/upload/${this.profile.picture}`;
+        } else {
+          this.profile.picture = `${this.env.urlApi}/images/default-profile.png`;
         }
       });
   }
 
   onSubmit(form: NgForm): void {
-    console.log(form.value);
+    this.profileService.putProfile(form, this.image)
+      .then(response => this.message = response.message)
+      .catch(error => this.message = error.message);
   }
 
-  pictureOnChange(event): void {
-    const files: FileList = event.target.files;
-    const file = files[0];
+  onFileAdded(event: Event): void {
+    this.image = (event.target as HTMLInputElement).files[0];
     const reader = new FileReader();
     reader.addEventListener('load', () => {
-      this.profile.picture = `url("${reader.result}")`;
+      this.profile.picture = reader.result;
     });
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(this.image);
   }
 
 }

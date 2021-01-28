@@ -3,17 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="916acb01-7b22-4e97-a9d4-d09734b5403f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../public/src/app/profil/profil.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public/src/app/profil/profil.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/src/app/profil/profil.component.sass" beforeDir="false" afterPath="$PROJECT_DIR$/../public/src/app/profil/profil.component.sass" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../public/src/app/profil/profil.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public/src/app/profil/profil.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public/src/app/services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public/src/app/services/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public/src/app/signup/signup.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public/src/app/signup/signup.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public/src/app/signup/signup.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public/src/app/signup/signup.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/controllers/auth.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/controllers/auth.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/models/user.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/models/user.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/auth.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/auth.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/publication.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/publication.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/user.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/user.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/src/app/services/profile.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public/src/app/services/profile.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/controllers/profile.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/controllers/profile.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/routes/profile.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/routes/profile.route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/profile.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/profile.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/db.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/profile.route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/profile.route.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,6 +38,11 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/images/upload" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -62,7 +65,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1611754867005</updated>
-      <workItem from="1611754868429" duration="5121000" />
+      <workItem from="1611754868429" duration="9329000" />
     </task>
     <servers />
   </component>
