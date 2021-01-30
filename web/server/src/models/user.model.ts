@@ -4,14 +4,7 @@ import bcrypt from 'bcrypt';
 import Publication from './publication.model';
 import Profile from './profile.model';
 
-interface IUser {
-    email: string;
-    password: string;
-    admin?: boolean;
-    Profile?: Profile;
-}
-
-class User extends Model<IUser> {
+class User extends Model {
     public id!: number;
     public email!: string;
     public password!: string;
@@ -48,28 +41,15 @@ User.beforeCreate((user) => {
         });
 });
 
-Publication.belongsTo(User, {
-    foreignKey: 'id',
-    as: 'users'
-});
+User.hasOne(Profile, { onDelete: 'CASCADE' });
+Profile.belongsTo(User);
 
-Profile.belongsTo(User, {
-    foreignKey: 'id',
-    as: 'users'
-});
-
-User.hasOne(Profile, {
-    foreignKey: 'userId',
-    as: 'Profile',
-    onDelete: 'CASCADE'
-});
-
-User.hasMany(Publication, {
-    foreignKey: 'userId',
-    as: 'Publication',
-    onDelete: 'CASCADE'
-});
+User.hasMany(Publication, { onDelete: 'CASCADE' });
+Publication.belongsTo(User);
+Publication.belongsTo(Profile, {foreignKey: 'UserId'});
 
 User.sync();
+Profile.sync();
+Publication.sync();
 
 export default User;

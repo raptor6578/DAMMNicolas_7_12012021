@@ -1,31 +1,16 @@
 import { DataTypes, Model } from 'Sequelize';
 import sequelize from '../db';
 
-interface IProfile {
-    userId: number;
-    lastName: string;
-    firstName: string;
-    birthDate?: Date;
-    picture?: string;
-}
-
-class Profile extends Model<IProfile> {
+class Profile extends Model {
     public id!: number;
-    public userId!: number;
     public lastName!: string;
     public firstName!: string;
     public birthDate!: Date;
     public picture!: string;
+    public userId!: number;
 }
 
 Profile.init({
-    userId: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'Users',
-            key: 'id'
-        }
-    },
     lastName: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -46,7 +31,5 @@ Profile.init({
     sequelize,
     modelName: 'Profile',
 });
-
-Profile.sync();
 
 export default Profile;

@@ -37,23 +37,12 @@ User.beforeCreate((user) => {
         throw new Error();
     });
 });
-publication_model_1.default.belongsTo(User, {
-    foreignKey: 'id',
-    as: 'users'
-});
-profile_model_1.default.belongsTo(User, {
-    foreignKey: 'id',
-    as: 'users'
-});
-User.hasOne(profile_model_1.default, {
-    foreignKey: 'userId',
-    as: 'Profile',
-    onDelete: 'CASCADE'
-});
-User.hasMany(publication_model_1.default, {
-    foreignKey: 'userId',
-    as: 'Publication',
-    onDelete: 'CASCADE'
-});
+User.hasOne(profile_model_1.default, { onDelete: 'CASCADE' });
+profile_model_1.default.belongsTo(User);
+User.hasMany(publication_model_1.default, { onDelete: 'CASCADE' });
+publication_model_1.default.belongsTo(User);
+publication_model_1.default.belongsTo(profile_model_1.default, { foreignKey: 'UserId' });
 User.sync();
+profile_model_1.default.sync();
+publication_model_1.default.sync();
 exports.default = User;

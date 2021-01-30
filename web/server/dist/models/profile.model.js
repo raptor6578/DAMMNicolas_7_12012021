@@ -8,13 +8,6 @@ const db_1 = __importDefault(require("../db"));
 class Profile extends Sequelize_1.Model {
 }
 Profile.init({
-    userId: {
-        type: Sequelize_1.DataTypes.INTEGER,
-        references: {
-            model: 'Users',
-            key: 'id'
-        }
-    },
     lastName: {
         type: Sequelize_1.DataTypes.STRING,
         allowNull: false,
@@ -35,5 +28,4 @@ Profile.init({
     sequelize: db_1.default,
     modelName: 'Profile',
 });
-Profile.sync();
 exports.default = Profile;

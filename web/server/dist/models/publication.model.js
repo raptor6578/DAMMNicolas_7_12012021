@@ -8,20 +8,16 @@ const db_1 = __importDefault(require("../db"));
 class Publication extends Sequelize_1.Model {
 }
 Publication.init({
-    userId: {
-        type: Sequelize_1.DataTypes.INTEGER,
-        references: {
-            model: 'Users',
-            key: 'id'
-        }
-    },
     content: {
         type: Sequelize_1.DataTypes.STRING,
         allowNull: false
+    },
+    picture: {
+        type: Sequelize_1.DataTypes.STRING,
+        allowNull: true
     }
 }, {
     sequelize: db_1.default,
     modelName: 'Publication',
 });
-Publication.sync();
 exports.default = Publication;

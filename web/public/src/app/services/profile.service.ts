@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {NgForm} from "@angular/forms";
+import {NgForm} from '@angular/forms';
 
-interface IProfile {
-  userId: number;
+export interface IProfile {
+  UserId: number;
   lastName: string;
   firstName: string;
-  birthDate?: Date;
-  picture?: string;
+  birthDate: Date;
+  picture: string;
 }
 
 @Injectable({
@@ -30,7 +30,7 @@ export class ProfileService {
     });
   }
 
-  putProfile(form: NgForm, image: File): Promise<{message: string}> {
+  putProfile(form: NgForm, image?: File): Promise<{message: string}> {
     const formData = new FormData();
     for (const key of Object.keys(form.value)) {
       if (form.value[key]) {
