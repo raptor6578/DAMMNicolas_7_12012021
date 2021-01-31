@@ -14,7 +14,8 @@ class PublicationRoute {
     }
     initializeRoutes() {
         this.router.get('/get-my-publications', auth_middleware_1.default, publication_controller_1.default.getMyPublications);
-        this.router.get('/', auth_middleware_1.default, publication_controller_1.default.getAllPublications);
+        this.router.delete('/:id', auth_middleware_1.default, publication_controller_1.default.deletePublication);
+        this.router.get('/', publication_controller_1.default.getAllPublications);
         this.router.post('/', auth_middleware_1.default, multer_middleware_1.default, publication_controller_1.default.postPublication);
     }
 }

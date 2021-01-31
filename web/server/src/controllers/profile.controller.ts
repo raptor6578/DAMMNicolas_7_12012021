@@ -4,7 +4,7 @@ import * as fs from "fs";
 
 class ProfileController {
     public getProfile(req: express.Request, res: express.Response) {
-        ProfileModel.findOne({ where: {UserId: res.locals.userId}})
+        ProfileModel.findOne({ where: {UserId: res.locals.UserId}})
             .then(profile => res.json(profile))
             .catch((error) => {
                 res.status(500);
@@ -12,7 +12,7 @@ class ProfileController {
             });
     }
     public putProfile(req: express.Request, res: express.Response) {
-        ProfileModel.findOne({ where: {UserId: res.locals.userId}})
+        ProfileModel.findOne({ where: {UserId: res.locals.UserId}})
             .then((profile: any) => {
                 if (!profile) {
                     res.status(404);

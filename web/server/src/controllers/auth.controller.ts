@@ -65,7 +65,7 @@ class AuthController {
                         // @ts-ignore
                         const token = jwt.sign(user.toJSON(), process.env.SECRET_JWT, {expiresIn: '24h'});
                         res.status(200);
-                        res.json({token});
+                        res.json({token, id: user.id, admin: user.admin});
                     })
                     .catch(error => {
                         res.status(500);

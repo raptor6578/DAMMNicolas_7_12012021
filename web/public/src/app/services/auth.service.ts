@@ -4,6 +4,12 @@ import {environment} from '../../environments/environment';
 import {BehaviorSubject} from 'rxjs';
 import {Router} from '@angular/router';
 
+export interface IAuth {
+  token: string;
+  id: number;
+  admin: boolean;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,10 +17,15 @@ export class AuthService {
 
   connected$ = new BehaviorSubject<boolean>(false);
   token: string;
+  id: number;
+  admin: boolean;
 
   constructor(private http: HttpClient, private router: Router) {
-    if (localStorage.getItem('token')) {
-      this.token = localStorage.getItem('token');
+    if (localStorage.getItem('auth')) {
+      const auth = JSON.parse(localStorage.getItem('auth'));
+      this.token = auth.token;
+      this.id = auth.id;
+      this.admin = auth.admin;
       this.connected$.next(true);
     }
   }
@@ -39,13 +50,15 @@ export class AuthService {
     });
   }
 
-  login(email: string, password: string): Promise<{token: string}> {
+  login(email: string, password: string): Promise<IAuth> {
     return new Promise((resolve, reject) => {
       this.http.post(environment.urlApi + '/api/auth/login', {email, password}).subscribe(
-        (response: {token: string}) => {
+        (response: IAuth) => {
           this.connected$.next(true);
           this.token = response.token;
-          localStorage.setItem('token', this.token);
+          this.id = response.id;
+          this.admin = response.admin;
+          localStorage.setItem('auth', JSON.stringify(response));
           resolve(response);
         },
         (response) => {
@@ -57,7 +70,9 @@ export class AuthService {
 
   logout(): void {
     delete this.token;
-    localStorage.removeItem('token');
+    delete this.id;
+    delete this.admin;
+    localStorage.removeItem('auth');
     this.connected$.next(false);
     this.router.navigate(['/']);
   }
@@ -66,5 +81,12 @@ export class AuthService {
     return this.token;
   }
 
+  getId(): number {
+    return this.id;
+  }
+
+  getAdmin(): boolean {
+    return this.admin;
+  }
 
 }

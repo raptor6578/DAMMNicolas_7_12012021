@@ -26,7 +26,7 @@ const profile_model_1 = __importDefault(require("../models/profile.model"));
 const fs = __importStar(require("fs"));
 class ProfileController {
     getProfile(req, res) {
-        profile_model_1.default.findOne({ where: { UserId: res.locals.userId } })
+        profile_model_1.default.findOne({ where: { UserId: res.locals.UserId } })
             .then(profile => res.json(profile))
             .catch((error) => {
             res.status(500);
@@ -34,7 +34,7 @@ class ProfileController {
         });
     }
     putProfile(req, res) {
-        profile_model_1.default.findOne({ where: { UserId: res.locals.userId } })
+        profile_model_1.default.findOne({ where: { UserId: res.locals.UserId } })
             .then((profile) => {
             if (!profile) {
                 res.status(404);

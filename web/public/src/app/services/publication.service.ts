@@ -48,4 +48,15 @@ export class PublicationService {
     });
   }
 
+  deletePublication(id: number): Promise<null> {
+    return new Promise((resolve, reject) => {
+      this.http.delete(environment.urlApi + '/api/publication/' + id)
+        .subscribe((response: null) => {
+          resolve(response);
+      }, error => {
+          reject(error);
+      });
+    });
+  }
+
 }

@@ -11,8 +11,17 @@
 
   <div *ngFor="let publication of publications">
     <div class="publication">
-      <span class="author">Publication de <b>{{publication.Profile.lastName}} {{publication.Profile.firstName}}</b> posté <b>{{publication.createdAt | dateInterval}}</b></span>
-      <span class="content">{{publication.content}}</span>
+      <div class="header-publication">
+        <div class="author">
+          <div [style.background-image]="'url(' + getUrlPicture(publication.Profile.picture) + ')'" class="profile-picture"></div>
+          <b>{{publication.Profile.lastName}} {{publication.Profile.firstName}}</b> posté <b>{{publication.createdAt | dateInterval}}</b>
+        </div>
+        <span *ngIf="auth.getAdmin() || auth.getId() === publication.UserId" (click)="onDeletePublication(publication.id)" class="delete">Supprimer</span>
+      </div>
+      <div class="content">{{publication.content}}</div>
+      <div class="illustration" *ngIf="publication.picture">
+        <img src="{{ getUrlPicture(publication.picture) }}" alt="publication de {{publication.Profile.lastName}} {{publication.Profile.firstName}}" />
+      </div>
     </div>
   </div>
 
