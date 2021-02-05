@@ -19,7 +19,6 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import { DateIntervalPipe } from './pipes/date-interval.pipe';
 
-
 @NgModule({
   declarations: [
     AppComponent,

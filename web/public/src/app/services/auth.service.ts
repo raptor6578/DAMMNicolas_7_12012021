@@ -3,11 +3,21 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {BehaviorSubject} from 'rxjs';
 import {Router} from '@angular/router';
+import {IProfile} from './profile.service';
 
 export interface IAuth {
   token: string;
   id: number;
   admin: boolean;
+}
+
+export interface IUser {
+  id: number;
+  email: string;
+  admin: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  Profile: IProfile;
 }
 
 @Injectable({
@@ -41,6 +51,8 @@ export class AuthService {
         }
       }).subscribe(
         (response: {message: string}) => {
+          this.login(email, password);
+          this.router.navigate(['/']);
           resolve(response);
         },
         (response) => {

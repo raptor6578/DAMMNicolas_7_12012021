@@ -13,29 +13,45 @@
       <change beforePath="$PROJECT_DIR$/../../db_data/#innodb_temp/temp_7.ibt" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/#innodb_temp/temp_7.ibt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../db_data/#innodb_temp/temp_8.ibt" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/#innodb_temp/temp_8.ibt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../db_data/#innodb_temp/temp_9.ibt" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/#innodb_temp/temp_9.ibt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../db_data/binlog.000018" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/binlog.000018" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../db_data/binlog.000019" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/binlog.000019" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../db_data/binlog.index" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/binlog.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../db_data/groupomania/profiles.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/groupomania/profiles.ibd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../db_data/groupomania/publications.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/groupomania/publications.ibd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../db_data/groupomania/users.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/groupomania/users.ibd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../db_data/ib_buffer_pool" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/ib_buffer_pool" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../db_data/ib_logfile0" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/ib_logfile0" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../db_data/ibdata1" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/ibdata1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../db_data/ibtmp1" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/ibtmp1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../db_data/mysql.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/mysql.ibd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../db_data/undo_001" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/undo_001" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../db_data/undo_002" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/undo_002" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/../public/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../public/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../public/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/src/app/app.component.sass" beforeDir="false" afterPath="$PROJECT_DIR$/../public/src/app/app.component.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public/src/app/app.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../public/src/app/home/home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public/src/app/home/home.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../public/src/app/home/home.component.sass" beforeDir="false" afterPath="$PROJECT_DIR$/../public/src/app/home/home.component.sass" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../public/src/app/home/home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public/src/app/home/home.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../public/src/app/services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public/src/app/services/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/src/app/services/profile.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public/src/app/services/profile.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../public/src/app/services/publication.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public/src/app/services/publication.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/controllers/auth.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/controllers/auth.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/controllers/profile.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/controllers/profile.controller.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/controllers/publication.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/controllers/publication.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/middleware/auth.middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/middleware/auth.middleware.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/models/user.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/models/user.model.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/routes/publication.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/routes/publication.route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/auth.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/auth.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/profile.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/profile.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/upload/183942_1710822822893_1607790094_1624544_2188474_n.jpg1612021196093.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/upload/184872_1710825862969_1607790094_1624562_5542318_n.jpg1612013307369.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/upload/20200522_175319.jpg1612112623443.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/upload/20200621_171731.jpg1612112644772.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/publication.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/publication.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/middleware/auth.middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middleware/auth.middleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/publication.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/publication.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/user.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/user.model.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/publication.route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/publication.route.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -92,7 +108,8 @@
       <option name="presentableId" value="Default" />
       <updated>1611754867005</updated>
       <workItem from="1611754868429" duration="24740000" />
-      <workItem from="1612023460718" duration="5862000" />
+      <workItem from="1612023460718" duration="26403000" />
+      <workItem from="1612528222854" duration="7524000" />
     </task>
     <servers />
   </component>

@@ -1,6 +1,8 @@
+import { createServer } from "http";
 import express from 'express';
 import bodyParser from "body-parser";
 import sanitize from 'mongo-sanitize';
+import {Server, Socket} from 'socket.io';
 import * as dotenv from 'dotenv';
 dotenv.config();
 import db from './db';
@@ -10,6 +12,7 @@ import profileRoutes from './routes/profile.route';
 import publicationRoutes from './routes/publication.route';
 
 if (process.env.EXPRESS_PORT &&
+    process.env.FRONTEND_URL &&
     process.env.MYSQL_HOST &&
     process.env.MYSQL_DB &&
     process.env.MYSQL_USERNAME &&
@@ -19,14 +22,24 @@ if (process.env.EXPRESS_PORT &&
 
     const config = {
         expressPort: process.env.EXPRESS_PORT,
+        frontendUrl: process.env.FRONTEND_URL,
         allowOrigin: process.env.ALLOW_ORIGIN
     };
 
     const app = express();
-    app.listen(config.expressPort, () => {
+    const httpServer = createServer(app).listen(config.expressPort, () => {
         console.log(`Le serveur vient de démarrer sur le port ${config.expressPort}.`);
     });
 
+    const io = new Server(httpServer, {
+        cors: {
+            origin: config.frontendUrl,
+            credentials: true,
+            methods: ["GET", "POST"]
+        }
+    });
+    app.set('io', io);
+    
     db.authenticate()
         .then(() => {
             console.log('Connexion à la base de données établie.');
@@ -58,5 +71,5 @@ if (process.env.EXPRESS_PORT &&
 
 } else {
     console.log(`Le fichier de configuration ".env" se trouvant à la racine du projet est incomplet, il doit contenir les champs suivants:
-   EXPRESS_PORT, MYSQL_HOST, MYSQL_DB, MYSQL_USERNAME, MYSQL_PASSWWORD, SECRET_JWT, ALLOW_ORIGIN`);
+   EXPRESS_PORT, FRONTEND_URL, MYSQL_HOST, MYSQL_DB, MYSQL_USERNAME, MYSQL_PASSWWORD, SECRET_JWT, ALLOW_ORIGIN`);
 }

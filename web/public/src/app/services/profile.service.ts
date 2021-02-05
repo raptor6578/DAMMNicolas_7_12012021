@@ -17,7 +17,7 @@ export interface IProfile {
 
 export class ProfileService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getProfile(): Promise<IProfile> {
     return new Promise((resolve, reject) => {

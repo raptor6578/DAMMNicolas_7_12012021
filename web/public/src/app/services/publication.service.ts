@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {NgForm} from '@angular/forms';
 import {IProfile} from './profile.service';
+import {IUser} from './auth.service';
 
 export interface IPublication {
   id: number;
@@ -12,6 +13,26 @@ export interface IPublication {
   updatedAt: Date;
   UserId: number;
   Profile: IProfile;
+  Comment: IComment[];
+  Vote: IVote[];
+}
+
+export interface IComment {
+  id: number;
+  content: string;
+  createdAt: Date;
+  updatedAt: Date;
+  PublicationId: number;
+  UserId: number;
+  User: IUser;
+}
+
+export interface IVote {
+  id: number;
+  UserId: number;
+  PublicationId: number;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 @Injectable({
@@ -19,7 +40,7 @@ export interface IPublication {
 })
 export class PublicationService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getAllPublications(): Promise<IPublication[]> {
     return new Promise((resolve, reject) => {
@@ -40,7 +61,7 @@ export class PublicationService {
     }
     return new Promise((resolve, reject) => {
       this.http.post(environment.urlApi + '/api/publication/', formData)
-        .subscribe((response: {message: string}) => {
+        .subscribe((response: { message: string }) => {
           resolve(response);
         }, error => {
           reject(error);
@@ -56,6 +77,39 @@ export class PublicationService {
       }, error => {
           reject(error);
       });
+    });
+  }
+
+  addComment(id: number, content: string): Promise<{message: string}> {
+    return new Promise((resolve, reject) => {
+      this.http.post(environment.urlApi + '/api/publication/add-comment', {id, content})
+        .subscribe((response: { message: string }) => {
+          resolve(response);
+        }, error => {
+          reject(error);
+        });
+    });
+  }
+
+  addVote(id: number): Promise<{message: string}> {
+    return new Promise((resolve, reject) => {
+      this.http.post(environment.urlApi + '/api/publication/add-vote', {id})
+        .subscribe((response: { message: string }) => {
+          resolve(response);
+        }, error => {
+          reject(error);
+        });
+    });
+  }
+
+  deleteVote(id: number): Promise<null> {
+    return new Promise((resolve, reject) => {
+      this.http.delete(environment.urlApi + '/api/publication/delete-vote/' + id)
+        .subscribe((response: null) => {
+          resolve(response);
+        }, error => {
+          reject(error);
+        });
     });
   }
 
