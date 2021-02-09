@@ -9,7 +9,7 @@ class Comment extends Sequelize_1.Model {
 }
 Comment.init({
     content: {
-        type: Sequelize_1.DataTypes.STRING,
+        type: Sequelize_1.DataTypes.STRING(1000),
         allowNull: false
     },
 }, {

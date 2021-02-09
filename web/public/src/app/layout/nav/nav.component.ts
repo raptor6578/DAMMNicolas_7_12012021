@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth.service';
+import {faHome, faIdBadge, faIdCard} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-nav',
@@ -8,6 +9,9 @@ import {AuthService} from '../../services/auth.service';
 })
 export class NavComponent implements OnInit {
 
+  faHome = faHome;
+  faIdCard = faIdCard;
+  faIdBadge = faIdBadge;
   connected: boolean;
 
   constructor(private auth: AuthService) { }

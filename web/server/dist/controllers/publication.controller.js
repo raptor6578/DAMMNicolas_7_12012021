@@ -36,8 +36,10 @@ class ProfileController {
             res.json({ message: error });
         });
     }
-    getAllPublications(req, res) {
+    getPublications(req, res) {
         publication_model_1.default.findAll({
+            limit: Number(req.params.limit),
+            offset: Number(req.params.offset),
             order: [['createdAt', 'DESC']],
             include: [
                 'Profile',

@@ -53,6 +53,17 @@ export class PublicationService {
     });
   }
 
+  getPublications(offset: number, limit: number): Promise<IPublication[]> {
+    return new Promise((resolve, reject) => {
+      this.http.get(environment.urlApi + `/api/publication/${offset}/${limit}`)
+        .subscribe((response: IPublication[]) => {
+          resolve(response);
+        }, error => {
+          reject(error);
+        });
+    });
+  }
+
   addPublication(form: NgForm, image?: File): Promise<{message: string}> {
     const formData = new FormData();
     formData.append('content', form.value.content);

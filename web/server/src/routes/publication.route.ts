@@ -15,7 +15,7 @@ class PublicationRoute {
         this.router.post('/add-vote', auth, publicationController.addVote);
         this.router.delete('/delete-vote/:id', auth, publicationController.deleteVote);
         this.router.delete('/:id', auth, publicationController.deletePublication);
-        this.router.get('/', publicationController.getAllPublications);
+        this.router.get('/:offset/:limit', publicationController.getPublications);
         this.router.post('/', auth, multer, publicationController.postPublication);
     }
 }

@@ -9,7 +9,7 @@ class Publication extends Sequelize_1.Model {
 }
 Publication.init({
     content: {
-        type: Sequelize_1.DataTypes.STRING,
+        type: Sequelize_1.DataTypes.STRING(1000),
         allowNull: false
     },
     picture: {

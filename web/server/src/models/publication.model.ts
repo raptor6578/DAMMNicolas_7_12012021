@@ -12,7 +12,7 @@ class Publication extends Model {
 
 Publication.init({
     content: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(1000),
         allowNull: false
     },
     picture: {

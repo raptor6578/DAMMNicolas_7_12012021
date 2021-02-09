@@ -14,8 +14,10 @@ class ProfileController {
                 res.json({message: error});
             });
     }
-    public getAllPublications(req: express.Request, res: express.Response) {
+    public getPublications(req: express.Request, res: express.Response) {
         PublicationModel.findAll({
+            limit: Number(req.params.limit),
+            offset: Number(req.params.offset),
             order: [ ['createdAt', 'DESC'] ],
             include: [
                 'Profile',

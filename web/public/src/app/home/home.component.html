@@ -2,7 +2,7 @@
 <div class="home">
   <form *ngIf="connected" (ngSubmit)="onSubmitPublication(f)" #f="ngForm">
     <h3>Publier sur le réseau Groupomania</h3>
-    <label for="content">Ecrivez quelque chose, lien d'article ou vidéo YouTube</label>
+    <label for="content">Ecrivez quelque chose</label>
     <textarea name="content" id="content" ngModel></textarea>
     <label for="image" class="label-image">Ajouter une image</label>
     <input type="file" name="image" id="image" accept="image/*" (change)="onFileAdded($event)"/>
@@ -22,22 +22,23 @@
         <img src="{{ getUrlPicture(publication.picture) }}" alt="publication de {{publication.Profile.lastName}} {{publication.Profile.firstName}}" />
       </div>
       <div *ngIf="connected" class="action">
-        <span *ngIf="!existingVote(publication.Vote)" (click)="like(publication.id)">Jaime ({{countVote(publication.Vote)}})</span>
-        <span *ngIf="existingVote(publication.Vote)" (click)="dislike(publication.id)">Jaime plus ({{countVote(publication.Vote)}})</span>
-        <span>Commenter</span>
+        <span *ngIf="!existingVote(publication.Vote)" (click)="like(publication.id)">J'aime ({{countVote(publication.Vote)}})</span>
+        <span *ngIf="existingVote(publication.Vote)" (click)="dislike(publication.id)">Je n'aime plus ({{countVote(publication.Vote)}})</span>
+        <span (click)="focusInputComment(publication.id)" >Commenter</span>
       </div>
       <div class="comments">
-        <div class="show-more">Afficher les commentaires précédents</div>
-        <div *ngFor="let comment of publication.Comment" class="comment">
+        <div *ngIf="publication.Comment.length >= maxCommentsRef[publication.id] || !maxCommentsRef[publication.id] && publication.Comment.length > maxComments"
+             (click)="showMoreComment(publication.id)" class="show-more">Voir les commentaires précédents</div>
+        <div *ngFor="let comment of publication.Comment|reverse|slice:0:maxCommentsRef[publication.id] || maxComments|reverse" class="comment">
           <div class="profile-picture" [style.background-image]="'url(' + getUrlPicture(comment.User.Profile.picture) + ')'"></div>
           <div class="content">
-            <span class="name">{{comment.User.Profile.lastName}} {{comment.User.Profile.firstName}}</span>
+            <span class="name"><b>{{comment.User.Profile.lastName}} {{comment.User.Profile.firstName}}</b> {{comment.createdAt|dateInterval}}</span>
             <div class="message">{{comment.content}}</div>
           </div>
         </div>
         <form *ngIf="connected" (ngSubmit)="onSubmitComment(f)" #f="ngForm">
           <input type="hidden" id="publicationId" name="publicationId" [ngModel]="publication.id" />
-          <input type="text" name="comment" id="comment" placeholder="Écrivez un commentaire..." ngModel />
+          <input type="text" name="comment" [id]="'input-comment-' + publication.id" placeholder="Écrivez un commentaire..." ngModel />
         </form>
       </div>
     </div>

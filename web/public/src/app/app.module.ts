@@ -18,6 +18,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import { DateIntervalPipe } from './pipes/date-interval.pipe';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ReversePipe } from './pipes/reverse.pipe';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { DateIntervalPipe } from './pipes/date-interval.pipe';
     LoginComponent,
     FooterComponent,
     ProfilComponent,
-    DateIntervalPipe
+    DateIntervalPipe,
+    ReversePipe
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import { DateIntervalPipe } from './pipes/date-interval.pipe';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
