@@ -4,12 +4,7 @@ import {environment} from '../../environments/environment';
 import {BehaviorSubject} from 'rxjs';
 import {Router} from '@angular/router';
 import {IProfile} from './profile.service';
-
-export interface IAuth {
-  token: string;
-  id: number;
-  admin: boolean;
-}
+import {Base64} from 'js-base64';
 
 export interface IUser {
   id: number;
@@ -17,7 +12,12 @@ export interface IUser {
   admin: boolean;
   createdAt: Date;
   updatedAt: Date;
-  Profile: IProfile;
+  Profile?: IProfile;
+}
+
+export interface ITokenData extends IUser {
+  iat: number;
+  exp: number;
 }
 
 @Injectable({
@@ -29,15 +29,28 @@ export class AuthService {
   token: string;
   id: number;
   admin: boolean;
+  email: string;
+  tokenIat: number;
+  tokenExp: number;
 
   constructor(private http: HttpClient, private router: Router) {
-    if (localStorage.getItem('auth')) {
-      const auth = JSON.parse(localStorage.getItem('auth'));
-      this.token = auth.token;
-      this.id = auth.id;
-      this.admin = auth.admin;
-      this.connected$.next(true);
+    if (localStorage.getItem('token')) {
+      const token = localStorage.getItem('token');
+      this.token = token;
+      this.initializeAuth(token);
     }
+  }
+
+  private initializeAuth(token: string): void {
+    const splitToken = token.split('.');
+    const tokenDecode = Base64.decode(splitToken[1]);
+    const tokenData: ITokenData = JSON.parse(tokenDecode);
+    this.id = tokenData.id;
+    this.admin = tokenData.admin;
+    this.email = tokenData.email;
+    this.tokenIat = tokenData.iat;
+    this.tokenExp = tokenData.exp;
+    this.connected$.next(true);
   }
 
   signup(email: string, password: string, lastName: string, firstName: string): Promise<{message: string}> {
@@ -62,15 +75,21 @@ export class AuthService {
     });
   }
 
-  login(email: string, password: string): Promise<IAuth> {
+  tokenNotExpired(): boolean {
+    if (this.tokenExp) {
+      const dateNow = Math.floor(Date.now() / 1000);
+      return this.tokenExp > dateNow;
+    }
+    return false;
+  }
+
+  login(email: string, password: string): Promise<{token: string}> {
     return new Promise((resolve, reject) => {
       this.http.post(environment.urlApi + '/api/auth/login', {email, password}).subscribe(
-        (response: IAuth) => {
-          this.connected$.next(true);
+        (response: {token: string}) => {
           this.token = response.token;
-          this.id = response.id;
-          this.admin = response.admin;
-          localStorage.setItem('auth', JSON.stringify(response));
+          this.initializeAuth(response.token);
+          localStorage.setItem('token', response.token);
           resolve(response);
         },
         (response) => {
@@ -84,7 +103,7 @@ export class AuthService {
     delete this.token;
     delete this.id;
     delete this.admin;
-    localStorage.removeItem('auth');
+    localStorage.removeItem('token');
     this.connected$.next(false);
     this.router.navigate(['/']);
   }
