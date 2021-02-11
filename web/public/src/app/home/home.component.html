@@ -27,9 +27,8 @@
         <span (click)="focusInputComment(publication.id)" >Commenter</span>
       </div>
       <div class="comments">
-        <div *ngIf="publication.Comment.length >= maxCommentsRef[publication.id] || !maxCommentsRef[publication.id] && publication.Comment.length > maxComments"
-             (click)="showMoreComment(publication.id)" class="show-more">Voir les commentaires précédents</div>
-        <div *ngFor="let comment of publication.Comment|reverse|slice:0:maxCommentsRef[publication.id] || maxComments|reverse" class="comment">
+        <div *ngIf="offsetComments[publication.id] !== 0" (click)="loadComments(publication.id)" class="show-more">Voir les commentaires précédents</div>
+        <div *ngFor="let comment of publication.Comment|reverse" class="comment">
           <div class="profile-picture" [style.background-image]="'url(' + getUrlPicture(comment.User.Profile.picture) + ')'"></div>
           <div class="content">
             <span class="name"><b>{{comment.User.Profile.lastName}} {{comment.User.Profile.firstName}}</b> {{comment.createdAt|dateInterval}}</span>

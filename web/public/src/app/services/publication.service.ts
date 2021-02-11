@@ -102,6 +102,17 @@ export class PublicationService {
     });
   }
 
+  getComment(id: number, offset: number, limit: number): Promise<IComment[]> {
+    return new Promise((resolve, reject) => {
+      this.http.get(environment.urlApi + `/api/publication/get-comment/${id}/${offset}/${limit}`)
+        .subscribe((response: IComment[]) => {
+          resolve(response);
+        }, error => {
+          reject(error);
+        });
+    });
+  }
+
   addVote(id: number): Promise<{message: string}> {
     return new Promise((resolve, reject) => {
       this.http.post(environment.urlApi + '/api/publication/add-vote', {id})

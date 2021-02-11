@@ -16,8 +16,8 @@ class ProfileController {
     }
     public getPublications(req: express.Request, res: express.Response) {
         PublicationModel.findAll({
-            limit: Number(req.params.limit),
             offset: Number(req.params.offset),
+            limit: Number(req.params.limit),
             order: [ ['createdAt', 'DESC'] ],
             include: [
                 'Profile',
@@ -25,6 +25,8 @@ class ProfileController {
                 {
                     model: CommentModel,
                     as: 'Comment',
+                    limit: 5,
+                    order: [ ['createdAt', 'DESC'] ],
                     include: [
                         {
                             model: UserModel,
@@ -171,6 +173,38 @@ class ProfileController {
                 res.status(500);
                 res.json({message: error});
             });
+    }
+
+    public getComment(req: express.Request, res: express.Response) {
+        if (!req.params.id || !req.params.offset || !req.params.limit) {
+            res.status(400);
+            return res.json({message: 'id, offset et limit requis.'});
+        }
+        CommentModel.findAll({
+            where: {
+                PublicationId: req.params.id
+            },
+            offset: Number(req.params.offset),
+            limit: Number(req.params.limit),
+            order: [ ['createdAt', 'DESC'] ],
+            include: [
+                {
+                    model: UserModel,
+                    as: 'User',
+                    attributes: {
+                        exclude: ['password']
+                    },
+                    include: ['Profile']
+                }
+            ]
+        })
+        .then(comment => {
+            res.json(comment)
+        })
+        .catch((error) => {
+            res.status(500);
+            res.json({message: error});
+        });
     }
     
     public addVote(req: express.Request, res: express.Response) {

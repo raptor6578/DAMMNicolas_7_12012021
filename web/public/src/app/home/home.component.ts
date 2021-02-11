@@ -18,8 +18,8 @@ export class HomeComponent implements OnInit {
   scrollEnd: boolean;
   limitPublications: number;
   offsetPublications: number;
-  maxComments: number;
-  maxCommentsRef: {};
+  limitComments: number;
+  offsetComments: {};
 
   constructor(private auth: AuthService,
               private publication: PublicationService,
@@ -38,27 +38,14 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.offsetPublications = 0;
-    this.limitPublications = 2;
     this.publications = [];
-    this.maxComments = 5;
-    this.maxCommentsRef = {};
+    this.limitPublications = 2;
+    this.offsetPublications = 0;
+    this.limitComments = 5;
+    this.offsetComments = {};
     this.auth.connected$.subscribe(value => this.connected = value);
     this.loadPublications();
     this.initializeSocketIO();
-  }
-
-  loadPublications(): void {
-    this.publication.getPublications(this.offsetPublications, this.limitPublications)
-      .then(publications => {
-        if (publications.length >= 1) {
-          for (const publication of publications) {
-            this.publications.push(publication);
-          }
-          this.offsetPublications += this.limitPublications;
-          this.scrollEnd = false;
-        }
-      });
   }
 
   private initializeSocketIO(): void {
@@ -78,7 +65,15 @@ export class HomeComponent implements OnInit {
 
     this.socket.on('newComment').subscribe((data: IComment) => {
       const indexPublication = this.publications.findIndex(publication => publication.id === Number(data.PublicationId));
-      this.publications[indexPublication].Comment.unshift(data);
+      this.publications[indexPublication].Comment.push(data);
+      const publicationId = this.publications[indexPublication].id;
+      if (this.offsetComments[publicationId] !== 0) {
+        if (this.offsetComments[publicationId]) {
+          this.offsetComments[publicationId]++;
+        } else {
+          this.offsetComments[publicationId] = 1;
+        }
+      }
     });
 
     this.socket.on('addVote').subscribe((data: IVote) => {
@@ -96,6 +91,43 @@ export class HomeComponent implements OnInit {
       }
     });
 
+  }
+
+  loadPublications(): void {
+    this.publication.getPublications(this.offsetPublications, this.limitPublications)
+      .then(publications => {
+        if (publications.length >= 1) {
+          for (const publication of publications) {
+            this.publications.push(publication);
+            if (publication.Comment.length < this.limitComments) {
+              this.offsetComments[publication.id] = 0;
+            }
+          }
+          this.offsetPublications += this.limitPublications;
+          this.scrollEnd = false;
+        }
+      });
+  }
+
+  loadComments(id: number): void {
+    if (!this.offsetComments[id]) {
+      this.offsetComments[id] = this.limitComments;
+    }
+    this.publication.getComment(id, this.offsetComments[id], this.limitComments)
+      .then((comments: IComment[]) => {
+        this.offsetComments[id] += this.limitComments;
+        if (comments.length > 0) {
+          for (const comment of comments) {
+            const indexPublication = this.publications.findIndex(publication => publication.id === id);
+            this.publications[indexPublication].Comment.unshift(comment);
+            if (comments.length < this.limitComments) {
+              this.offsetComments[id] = 0;
+            }
+          }
+        } else {
+          this.offsetComments[id] = 0;
+        }
+      });
   }
 
   onSubmitPublication(form: NgForm): void {
@@ -133,14 +165,6 @@ export class HomeComponent implements OnInit {
   existingVote(votes: IVote[]): boolean {
     const indexVote = votes.findIndex(vote => vote.UserId === this.auth.getId());
     return indexVote !== -1;
-  }
-
-  showMoreComment(index): void {
-    if (this.maxCommentsRef[index]) {
-      this.maxCommentsRef[index] += this.maxComments;
-    } else {
-      this.maxCommentsRef[index] = this.maxComments * 2;
-    }
   }
 
   focusInputComment(id: number): void {

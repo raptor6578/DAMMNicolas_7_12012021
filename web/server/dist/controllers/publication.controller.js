@@ -38,8 +38,8 @@ class ProfileController {
     }
     getPublications(req, res) {
         publication_model_1.default.findAll({
-            limit: Number(req.params.limit),
             offset: Number(req.params.offset),
+            limit: Number(req.params.limit),
             order: [['createdAt', 'DESC']],
             include: [
                 'Profile',
@@ -47,6 +47,8 @@ class ProfileController {
                 {
                     model: comment_model_1.default,
                     as: 'Comment',
+                    limit: 5,
+                    order: [['createdAt', 'DESC']],
                     include: [
                         {
                             model: user_model_1.default,
@@ -186,6 +188,37 @@ class ProfileController {
                 res.status(400);
                 res.json({ message: error });
             });
+        })
+            .catch((error) => {
+            res.status(500);
+            res.json({ message: error });
+        });
+    }
+    getComment(req, res) {
+        if (!req.params.id || !req.params.offset || !req.params.limit) {
+            res.status(400);
+            return res.json({ message: 'id, offset et limit requis.' });
+        }
+        comment_model_1.default.findAll({
+            where: {
+                PublicationId: req.params.id
+            },
+            offset: Number(req.params.offset),
+            limit: Number(req.params.limit),
+            order: [['createdAt', 'DESC']],
+            include: [
+                {
+                    model: user_model_1.default,
+                    as: 'User',
+                    attributes: {
+                        exclude: ['password']
+                    },
+                    include: ['Profile']
+                }
+            ]
+        })
+            .then(comment => {
+            res.json(comment);
         })
             .catch((error) => {
             res.status(500);
