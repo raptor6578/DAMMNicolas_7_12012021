@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npm-run-all --parallel node-watch ts-watch",
+    "start": "npm-run-all --parallel node-watch ts-watch",
+    "prod": "node dist/index.js",
     "node-watch": "nodemon dist/index.js",
-    "ts-watch": "tsc --watch"
+    "ts-watch": "tsc --watch",
+    "build": "tsc"
   },
   "author": "DAMM Nicolas",
   "license": "ISC",

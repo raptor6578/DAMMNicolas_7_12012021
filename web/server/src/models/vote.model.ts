@@ -1,4 +1,4 @@
-import { Model } from 'Sequelize';
+import { Model } from 'sequelize';
 import sequelize from '../db';
 
 class Vote extends Model {

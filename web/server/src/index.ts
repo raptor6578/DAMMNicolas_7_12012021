@@ -2,7 +2,7 @@ import { createServer } from "http";
 import express from 'express';
 import bodyParser from "body-parser";
 import sanitize from 'mongo-sanitize';
-import {Server, Socket} from 'socket.io';
+import {Server} from 'socket.io';
 import * as dotenv from 'dotenv';
 dotenv.config();
 import db from './db';
@@ -12,7 +12,6 @@ import profileRoutes from './routes/profile.route';
 import publicationRoutes from './routes/publication.route';
 
 if (process.env.EXPRESS_PORT &&
-    process.env.FRONTEND_URL &&
     process.env.MYSQL_HOST &&
     process.env.MYSQL_DB &&
     process.env.MYSQL_USERNAME &&
@@ -33,7 +32,7 @@ if (process.env.EXPRESS_PORT &&
 
     const io = new Server(httpServer, {
         cors: {
-            origin: config.frontendUrl,
+            origin: config.allowOrigin,
             credentials: true,
             methods: ["GET", "POST"]
         }
@@ -71,5 +70,5 @@ if (process.env.EXPRESS_PORT &&
 
 } else {
     console.log(`Le fichier de configuration ".env" se trouvant à la racine du projet est incomplet, il doit contenir les champs suivants:
-   EXPRESS_PORT, FRONTEND_URL, MYSQL_HOST, MYSQL_DB, MYSQL_USERNAME, MYSQL_PASSWWORD, SECRET_JWT, ALLOW_ORIGIN`);
+   EXPRESS_PORT, MYSQL_HOST, MYSQL_DB, MYSQL_USERNAME, MYSQL_PASSWWORD, SECRET_JWT, ALLOW_ORIGIN`);
 }

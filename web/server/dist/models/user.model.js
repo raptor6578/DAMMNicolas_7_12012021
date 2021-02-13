@@ -3,27 +3,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const Sequelize_1 = require("Sequelize");
+const sequelize_1 = require("sequelize");
 const db_1 = __importDefault(require("../db"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const publication_model_1 = __importDefault(require("./publication.model"));
 const profile_model_1 = __importDefault(require("./profile.model"));
 const comment_model_1 = __importDefault(require("./comment.model"));
 const vote_model_1 = __importDefault(require("./vote.model"));
-class User extends Sequelize_1.Model {
+class User extends sequelize_1.Model {
 }
 User.init({
     email: {
-        type: Sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: false,
         unique: true
     },
     password: {
-        type: Sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: false
     },
     admin: {
-        type: Sequelize_1.DataTypes.BOOLEAN,
+        type: sequelize_1.DataTypes.BOOLEAN,
         defaultValue: false
     }
 }, {

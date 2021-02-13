@@ -34,7 +34,6 @@ const auth_route_1 = __importDefault(require("./routes/auth.route"));
 const profile_route_1 = __importDefault(require("./routes/profile.route"));
 const publication_route_1 = __importDefault(require("./routes/publication.route"));
 if (process.env.EXPRESS_PORT &&
-    process.env.FRONTEND_URL &&
     process.env.MYSQL_HOST &&
     process.env.MYSQL_DB &&
     process.env.MYSQL_USERNAME &&
@@ -52,7 +51,7 @@ if (process.env.EXPRESS_PORT &&
     });
     const io = new socket_io_1.Server(httpServer, {
         cors: {
-            origin: config.frontendUrl,
+            origin: config.allowOrigin,
             credentials: true,
             methods: ["GET", "POST"]
         }
@@ -85,5 +84,5 @@ if (process.env.EXPRESS_PORT &&
 }
 else {
     console.log(`Le fichier de configuration ".env" se trouvant à la racine du projet est incomplet, il doit contenir les champs suivants:
-   EXPRESS_PORT, FRONTEND_URL, MYSQL_HOST, MYSQL_DB, MYSQL_USERNAME, MYSQL_PASSWWORD, SECRET_JWT, ALLOW_ORIGIN`);
+   EXPRESS_PORT, MYSQL_HOST, MYSQL_DB, MYSQL_USERNAME, MYSQL_PASSWWORD, SECRET_JWT, ALLOW_ORIGIN`);
 }

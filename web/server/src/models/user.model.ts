@@ -1,4 +1,4 @@
-import { DataTypes, Model } from 'Sequelize';
+import { DataTypes, Model } from 'sequelize';
 import sequelize from '../db';
 import bcrypt from 'bcrypt';
 import Publication from './publication.model';

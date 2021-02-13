@@ -3,25 +3,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const Sequelize_1 = require("Sequelize");
+const sequelize_1 = require("sequelize");
 const db_1 = __importDefault(require("../db"));
-class Profile extends Sequelize_1.Model {
+class Profile extends sequelize_1.Model {
 }
 Profile.init({
     lastName: {
-        type: Sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
     firstName: {
-        type: Sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: false
     },
     birthDate: {
-        type: Sequelize_1.DataTypes.DATE,
+        type: sequelize_1.DataTypes.DATE,
         allowNull: true
     },
     picture: {
-        type: Sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: true
     }
 }, {
