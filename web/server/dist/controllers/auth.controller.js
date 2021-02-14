@@ -79,5 +79,33 @@ class AuthController {
             res.json({ message: error });
         });
     }
+    delete(req, res) {
+        if (!req.params.id) {
+            res.status(400);
+            return res.json({ message: `Vous devez entrer l'id du compte à supprimer.` });
+        }
+        user_model_1.default.findOne({ where: { id: req.params.id } })
+            .then((user) => {
+            if (!user) {
+                res.status(401);
+                return res.json({ message: `Id introuvable dans la base de données.` });
+            }
+            if (user.id === res.locals.UserId || res.locals.admin) {
+                user.destroy()
+                    .then(() => {
+                    res.status(204);
+                    return res.send();
+                })
+                    .catch((error) => {
+                    res.status(400);
+                    res.json({ message: error });
+                });
+            }
+        })
+            .catch((error) => {
+            res.status(500);
+            res.json({ message: error });
+        });
+    }
 }
 exports.default = new AuthController();

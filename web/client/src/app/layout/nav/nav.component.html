@@ -1,5 +1,5 @@
 <nav>
   <a routerLink="/"><fa-icon [icon]="faHome"></fa-icon> Accueil</a>
   <a *ngIf="!connected" routerLink="signup"><fa-icon [icon]="faIdCard"></fa-icon> Inscription</a>
-  <a *ngIf="connected" routerLink="profil"><fa-icon [icon]="faIdBadge"></fa-icon> Mon profil</a>
+  <a *ngIf="connected" routerLink="profile"><fa-icon [icon]="faIdBadge"></fa-icon> Mon profil</a>
 </nav>

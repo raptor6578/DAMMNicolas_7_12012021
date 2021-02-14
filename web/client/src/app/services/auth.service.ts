@@ -99,6 +99,22 @@ export class AuthService {
     });
   }
 
+  delete(id: number): Promise<null> {
+    return new Promise((resolve, reject) => {
+      this.http.delete(environment.urlApi + '/api/auth/delete/' + id).subscribe(
+        (response: null) => {
+          if (id === this.id) {
+            this.logout();
+          }
+          resolve(response);
+        },
+        (response) => {
+          reject(response.error);
+        }
+      );
+    });
+  }
+
   logout(): void {
     delete this.token;
     delete this.id;

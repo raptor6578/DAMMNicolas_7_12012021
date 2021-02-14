@@ -17,7 +17,6 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(form: NgForm): void {
-    console.log(form.value);
     if (form.value.password !== form.value.confirmPassword) {
       this.errorMessage = 'Les deux mots de passe ne sont pas identique';
       return;

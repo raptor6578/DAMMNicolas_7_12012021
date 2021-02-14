@@ -10,8 +10,23 @@
       <change beforePath="$PROJECT_DIR$/../../db_data/mysql.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/mysql.ibd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../db_data/undo_001" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/undo_001" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../db_data/undo_002" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/undo_002" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../docker-compose.dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../docker-compose.dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../docker-compose.prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../docker-compose.prod.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/app.component.sass" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/app.component.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/home/home.component.sass" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/home/home.component.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/home/home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/home/home.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/layout/header/header.component.sass" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/layout/header/header.component.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/layout/nav/nav.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/layout/nav/nav.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/profil/profil.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/profile/profile.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/profil/profil.component.sass" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/profile/profile.component.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/profil/profil.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/profile/profile.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/services/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/signup/signup.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/signup/signup.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/controllers/auth.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/controllers/auth.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/routes/auth.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/routes/auth.route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/auth.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/auth.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/auth.route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/auth.route.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -70,7 +85,7 @@
       <workItem from="1612023460718" duration="26403000" />
       <workItem from="1612528222854" duration="17439000" />
       <workItem from="1613044985697" duration="5149000" />
-      <workItem from="1613240533813" duration="1713000" />
+      <workItem from="1613240533813" duration="3052000" />
     </task>
     <servers />
   </component>

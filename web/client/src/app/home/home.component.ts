@@ -145,7 +145,13 @@ export class HomeComponent implements OnInit {
   }
 
   getUrlPicture(picture: string): string {
-    return environment.urlApi + '/images/upload/' + picture;
+    let urlPicture;
+    if (picture) {
+      urlPicture = environment.urlApi + '/images/upload/' + picture;
+    } else {
+      urlPicture = environment.urlApi + '/images/default-profile.png';
+    }
+    return urlPicture;
   }
 
   onSubmitComment(form: NgForm): void {

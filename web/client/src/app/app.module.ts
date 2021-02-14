@@ -12,7 +12,7 @@ import { FooterComponent } from './layout/footer/footer.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './middleware/auth-interceptor';
-import { ProfilComponent } from './profil/profil.component';
+import { ProfileComponent, ProfileRemoveAccountConfirmDialogComponent } from './profile/profile.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -20,6 +20,8 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { DateIntervalPipe } from './pipes/date-interval.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReversePipe } from './pipes/reverse.pipe';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { ReversePipe } from './pipes/reverse.pipe';
     HeaderComponent,
     LoginComponent,
     FooterComponent,
-    ProfilComponent,
+    ProfileComponent,
+    ProfileRemoveAccountConfirmDialogComponent,
     DateIntervalPipe,
     ReversePipe
   ],
@@ -44,7 +47,9 @@ import { ReversePipe } from './pipes/reverse.pipe';
     MatDatepickerModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
