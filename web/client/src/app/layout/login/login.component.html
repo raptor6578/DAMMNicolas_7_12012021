@@ -1,8 +1,22 @@
-<div class="login">
-  <form *ngIf="!connected" (ngSubmit)="onSubmit(f)" #f="ngForm">
+<div *ngIf="!connected" class="login">
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
     <input type="email" placeholder="Votre email" name="email" ngModel />
     <input type="password" placeholder="Votre mot de passe" name="password" ngModel />
     <button class="login-button">Connexion</button>
   </form>
-  <button *ngIf="connected" (click)="logout()" class="logout-button">Se deconnecter</button>
 </div>
+<button *ngIf="connected" (click)="logout()" class="logout-button">Se deconnecter</button>
+
+<div class="button-mobile-connect">
+  <fa-icon *ngIf="!connected" [icon]="faSignInAlt" (click)="loginMobile ? loginMobile = false : loginMobile = true" size="2x"></fa-icon>
+  <fa-icon *ngIf="connected" (click)="logout()" [icon]="faSignOutAlt" size="2x"></fa-icon>
+</div>
+<div *ngIf="!connected && loginMobile" class="login-mobile">
+  <div class="arrow"></div>
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <input type="email" placeholder="Votre email" name="email" ngModel />
+    <input type="password" placeholder="Votre mot de passe" name="password" ngModel />
+    <button class="login-button">Connexion</button>
+  </form>
+</div>
+

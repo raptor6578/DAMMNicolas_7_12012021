@@ -1,17 +1,62 @@
+.login-mobile
+  display: none
+
+.button-mobile-connect
+  display: none
+
 .login
   margin: 13px
   input[type=email],[type=password]
     width: 140px
     height: 23px
     margin-right: 5px
-  button
-    border: none
-    border-radius: 5px
-    padding: 5px
+
+button
+  border: none
+  border-radius: 5px
+  padding: 5px
 
 .logout-button
+  margin: 13px
   color: white
   background-color: #ff5c18
 
 .login-button
   background-color: #33fa6d
+
+@media screen and (max-width: 700px)
+  .login
+    display: none
+  .logout-button
+    display: none
+  .button-mobile-connect
+    display: block
+    margin: 10px
+  .login-mobile
+    display: block
+    position: absolute
+    width: 200px
+    height: auto
+    right: 10px
+    top: 90px
+    background-color: #efefef
+    box-shadow: 0 0 20px 0 #b2b2b2
+    border-radius: 5px
+    margin: 0
+    .arrow
+      position: relative
+      width: 0
+      height: 0
+      border-left: 13px solid transparent
+      border-right: 13px solid transparent
+      border-bottom: 13px solid #efefef
+      top: -10px
+      left: 170px
+    input[type=email],[type=password]
+      width: 95%
+      margin-bottom: 10px
+    form
+      display: flex
+      flex-direction: column
+      padding: 10px
+
