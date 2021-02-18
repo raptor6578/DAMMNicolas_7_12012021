@@ -7,7 +7,7 @@
 
 Sous Mac et Linux Makefile est disponible par défaut.
 
-Si vous utilisez Windows, installez Makefile sur votre ordinateur:
+Si vous utilisez Windows, utilisez le terminal Cygwin ou installez Makefile sur votre ordinateur:
 
 - http://gnuwin32.sourceforge.net/packages/make.htm
 
