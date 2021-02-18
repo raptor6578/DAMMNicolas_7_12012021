@@ -1,6 +1,7 @@
 import express from 'express';
 import authController from '../controllers/auth.controller';
 import auth from '../middleware/auth.middleware';
+import admin from '../middleware/admin.middleware';
 
 class AuthRoute {
     router: express.Router;
@@ -11,7 +12,9 @@ class AuthRoute {
     private initializeRoutes() {
         this.router.post('/signup', authController.signup);
         this.router.post('/login', authController.login);
-        this.router.delete('/delete/:id', auth, authController.delete);
+        this.router.post('/set-admin', auth, admin, authController.setAdmin);
+        this.router.get('/get-all-users', authController.getAllUsers);
+        this.router.delete('/delete/:id', auth, admin, authController.delete);
     }
 }
 

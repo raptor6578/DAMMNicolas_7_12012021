@@ -42,17 +42,6 @@ export class PublicationService {
 
   constructor(private http: HttpClient) {}
 
-  getAllPublications(): Promise<IPublication[]> {
-    return new Promise((resolve, reject) => {
-      this.http.get(environment.urlApi + '/api/publication/')
-        .subscribe((response: IPublication[]) => {
-          resolve(response);
-        }, error => {
-          reject(error);
-        });
-    });
-  }
-
   getPublications(offset: number, limit: number): Promise<IPublication[]> {
     return new Promise((resolve, reject) => {
       this.http.get(environment.urlApi + `/api/publication/${offset}/${limit}`)
@@ -88,6 +77,17 @@ export class PublicationService {
       }, error => {
           reject(error);
       });
+    });
+  }
+
+  deleteComment(idPublication: number, idComment: number): Promise<null> {
+    return new Promise((resolve, reject) => {
+      this.http.delete(environment.urlApi + '/api/publication/delete-comment/' + idPublication + '/' + idComment)
+        .subscribe((response: null) => {
+          resolve(response);
+        }, error => {
+          reject(error);
+        });
     });
   }
 

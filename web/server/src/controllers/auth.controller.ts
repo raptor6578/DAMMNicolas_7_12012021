@@ -66,6 +66,8 @@ class AuthController {
                         const token = jwt.sign(user.toJSON(), process.env.SECRET_JWT, {expiresIn: '24h'});
                         res.status(200);
                         res.json({token});
+                        user.lastConnection = new Date()
+                        user.save().then()
                     })
                     .catch(error => {
                         res.status(500);
@@ -98,6 +100,43 @@ class AuthController {
                             res.json({message: error});
                         });
                 }
+            })
+            .catch((error) => {
+                res.status(500);
+                res.json({message: error});
+            });
+    }
+    public getAllUsers(req: express.Request, res: express.Response) {
+        UserModel.findAll({include: ['Profile']})
+            .then((users) => {
+                res.json(users);
+            })
+            .catch((error) => {
+                res.status(500);
+                res.json({message: error});
+            });
+    }
+    public setAdmin(req: express.Request, res: express.Response) {
+        if (!req.body.id || !req.body.admin) {
+            res.status(400);
+            return res.json({message: `Vous devez entrer l'id du compte à modifier et indiquer les droits.` });
+        }
+        UserModel.findOne({where: {id: req.body.id}})
+            .then((user) => {
+                if (!user) {
+                    res.status(401);
+                    return res.json({message: `Id introuvable dans la base de données.`});
+                }
+                user.admin = req.body.admin;
+                user.save()
+                    .then(() => {
+                        res.status(200);
+                        res.json({message: 'Les droits de l\'utilisateur ont été modifiés.'});
+                    })
+                    .catch((error) => {
+                        res.status(400);
+                        res.json({message: error});
+                    });
             })
             .catch((error) => {
                 res.status(500);

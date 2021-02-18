@@ -25,6 +25,10 @@ User.init({
     admin: {
         type: sequelize_1.DataTypes.BOOLEAN,
         defaultValue: false
+    },
+    lastConnection: {
+        type: sequelize_1.DataTypes.DATE,
+        defaultValue: new Date()
     }
 }, {
     sequelize: db_1.default,

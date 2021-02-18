@@ -2,8 +2,9 @@ import {Component, HostListener, OnInit} from '@angular/core';
 import {AuthService} from '../services/auth.service';
 import {IComment, IPublication, IVote, PublicationService} from '../services/publication.service';
 import {NgForm} from '@angular/forms';
-import { environment } from '../../environments/environment';
 import {SocketIoService} from '../services/socket-io.service';
+import {ProfileService} from '../services/profile.service';
+import {faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
@@ -20,9 +21,12 @@ export class HomeComponent implements OnInit {
   offsetPublications: number;
   limitComments: number;
   offsetComments: {};
+  admin: boolean;
+  faTrashAlt = faTrashAlt;
 
   constructor(private auth: AuthService,
               private publication: PublicationService,
+              private profile: ProfileService,
               private socket: SocketIoService) {}
 
   @HostListener('window:scroll', ['$event'])
@@ -43,7 +47,8 @@ export class HomeComponent implements OnInit {
     this.offsetPublications = 0;
     this.limitComments = 5;
     this.offsetComments = {};
-    this.auth.connected$.subscribe(value => this.connected = value);
+    this.auth.connected$.subscribe(connected => this.connected = connected);
+    this.auth.admin$.subscribe(admin => this.admin = admin);
     this.loadPublications();
     this.initializeSocketIO();
   }
@@ -60,6 +65,18 @@ export class HomeComponent implements OnInit {
       if (indexPublication !== -1) {
         this.publications.splice(indexPublication, 1);
         this.offsetPublications--;
+      }
+    });
+
+    this.socket.on('deleteComment').subscribe((data: {idPublication: number, idComment: number}) => {
+      const indexPublication = this.publications.findIndex(publication => publication.id === Number(data.idPublication));
+      if (indexPublication !== -1) {
+        const indexComment = this.publications[indexPublication].Comment.findIndex(comment => comment.id === Number(data.idComment));
+        if (indexComment !== -1) {
+          this.publications[indexPublication].Comment.splice(indexComment, 1);
+          const idPublication = this.publications[indexPublication].id;
+          // this.offsetComments[idPublication]--;
+        }
       }
     });
 
@@ -140,18 +157,12 @@ export class HomeComponent implements OnInit {
     this.publication.deletePublication(id).then();
   }
 
-  onFileAdded(event: Event): void {
-    this.image = (event.target as HTMLInputElement).files[0];
+  onDeleteComment(idPublication: number, idComment: number): void {
+    this.publication.deleteComment(idPublication, idComment).then();
   }
 
-  getUrlPicture(picture: string): string {
-    let urlPicture;
-    if (picture) {
-      urlPicture = environment.urlApi + '/images/upload/' + picture;
-    } else {
-      urlPicture = environment.urlApi + '/images/default-profile.png';
-    }
-    return urlPicture;
+  onFileAdded(event: Event): void {
+    this.image = (event.target as HTMLInputElement).files[0];
   }
 
   onSubmitComment(form: NgForm): void {

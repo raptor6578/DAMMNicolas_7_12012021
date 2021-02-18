@@ -50,4 +50,14 @@ export class ProfileService {
     });
   }
 
+  getUrlPicture(picture: string): string {
+    let urlPicture;
+    if (picture) {
+      urlPicture = environment.urlApi + '/images/upload/' + picture;
+    } else {
+      urlPicture = environment.urlApi + '/images/default-profile.png';
+    }
+    return urlPicture;
+  }
+
 }

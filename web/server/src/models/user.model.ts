@@ -11,6 +11,7 @@ class User extends Model {
     public email!: string;
     public password!: string;
     public admin!: boolean;
+    public lastConnection!: Date
     public Profile!: Profile
 }
 
@@ -27,6 +28,10 @@ User.init({
     admin: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
+    },
+    lastConnection: {
+        type: DataTypes.DATE,
+        defaultValue: new Date()
     }
 }, {
     sequelize,

@@ -12,14 +12,16 @@
     <div class="publication">
       <div class="header-publication">
         <div class="author">
-          <div [style.background-image]="'url(' + getUrlPicture(publication.Profile.picture) + ')'" class="profile-picture"></div>
+          <div [style.background-image]="'url(' + profile.getUrlPicture(publication.Profile.picture) + ')'" class="profile-picture"></div>
           <b>{{publication.Profile.lastName}} {{publication.Profile.firstName}}</b> posté <b>{{publication.createdAt | dateInterval}}</b>
         </div>
-        <span *ngIf="auth.getAdmin() || auth.getId() === publication.UserId" (click)="onDeletePublication(publication.id)" class="delete">Supprimer</span>
+        <span *ngIf="admin || auth.getId() === publication.UserId" (click)="onDeletePublication(publication.id)" class="delete">
+          <fa-icon [icon]="faTrashAlt"></fa-icon>
+        </span>
       </div>
       <div class="content">{{publication.content}}</div>
       <div class="illustration" *ngIf="publication.picture">
-        <img src="{{ getUrlPicture(publication.picture) }}" alt="publication de {{publication.Profile.lastName}} {{publication.Profile.firstName}}" />
+        <img src="{{ profile.getUrlPicture(publication.picture) }}" alt="publication de {{publication.Profile.lastName}} {{publication.Profile.firstName}}" />
       </div>
       <div *ngIf="connected" class="action">
         <span *ngIf="!existingVote(publication.Vote)" (click)="like(publication.id)">J'aime ({{countVote(publication.Vote)}})</span>
@@ -29,9 +31,12 @@
       <div class="comments">
         <div *ngIf="offsetComments[publication.id] !== 0" (click)="loadComments(publication.id)" class="show-more">Voir les commentaires précédents</div>
         <div *ngFor="let comment of publication.Comment|reverse" class="comment">
-          <div class="profile-picture" [style.background-image]="'url(' + getUrlPicture(comment.User.Profile.picture) + ')'"></div>
+          <div class="profile-picture" [title]="comment.createdAt|dateInterval" [style.background-image]="'url(' + profile.getUrlPicture(comment.User.Profile.picture) + ')'"></div>
           <div class="content">
-            <span class="name"><b>{{comment.User.Profile.lastName}} {{comment.User.Profile.firstName}}</b> {{comment.createdAt|dateInterval}}</span>
+            <div class="name">
+              <b>{{comment.User.Profile.lastName}} {{comment.User.Profile.firstName}}</b>
+              <span (click)="onDeleteComment(publication.id, comment.id)" class="delete" *ngIf="publication.UserId === auth.getId() || admin"><fa-icon [icon]="faTrashAlt"></fa-icon></span>
+            </div>
             <div class="message">{{comment.content}}</div>
           </div>
         </div>

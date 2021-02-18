@@ -1,0 +1,18 @@
+<div class="admin">
+<h1>Espace admin</h1>
+  <div class="users-list">
+    <div *ngFor="let user of users" class="user">
+      <span [style.background-image]="'url(' + profile.getUrlPicture(user.Profile.picture) + ')'" class="profile-picture"></span>
+      <span class="name">{{user.Profile.lastName}} {{user.Profile.firstName}}</span>
+      <span class="last-connection">{{user.lastConnection|dateInterval}}</span>
+      <span class="user-type">
+        <select (change)="setAdmin(user.id, $event.target.value)" [disabled]="user.id === auth.getId()">
+          <option [selected]="user.admin" value="1">Admin</option>
+          <option [selected]="!user.admin" value="0">Utilisateur</option>
+        </select>
+      </span>
+      <span class="email"><a href="mailto:{{user.email}}"><fa-icon [icon]="faEnvelope"></fa-icon></a></span>
+      <span class="delete"><fa-icon (click)="deleteUser(user.id)" [icon]="faTrashAlt"></fa-icon></span>
+    </div>
+  </div>
+</div>

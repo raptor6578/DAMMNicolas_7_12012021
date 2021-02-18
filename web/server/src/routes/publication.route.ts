@@ -14,6 +14,7 @@ class PublicationRoute {
         this.router.post('/add-comment', auth, publicationController.addComment);
         this.router.get('/get-comment/:id/:offset/:limit', auth, publicationController.getComment);
         this.router.post('/add-vote', auth, publicationController.addVote);
+        this.router.delete('/delete-comment/:idPublication/:idComment', auth, publicationController.deleteComment);
         this.router.delete('/delete-vote/:id', auth, publicationController.deleteVote);
         this.router.delete('/:id', auth, publicationController.deletePublication);
         this.router.get('/:offset/:limit', publicationController.getPublications);

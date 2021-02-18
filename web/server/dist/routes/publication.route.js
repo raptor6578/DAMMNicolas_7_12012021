@@ -17,6 +17,7 @@ class PublicationRoute {
         this.router.post('/add-comment', auth_middleware_1.default, publication_controller_1.default.addComment);
         this.router.get('/get-comment/:id/:offset/:limit', auth_middleware_1.default, publication_controller_1.default.getComment);
         this.router.post('/add-vote', auth_middleware_1.default, publication_controller_1.default.addVote);
+        this.router.delete('/delete-comment/:idPublication/:idComment', auth_middleware_1.default, publication_controller_1.default.deleteComment);
         this.router.delete('/delete-vote/:id', auth_middleware_1.default, publication_controller_1.default.deleteVote);
         this.router.delete('/:id', auth_middleware_1.default, publication_controller_1.default.deletePublication);
         this.router.get('/:offset/:limit', publication_controller_1.default.getPublications);

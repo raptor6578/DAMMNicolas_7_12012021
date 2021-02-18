@@ -20,8 +20,9 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { DateIntervalPipe } from './pipes/date-interval.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReversePipe } from './pipes/reverse.pipe';
-import {MatDialogModule} from "@angular/material/dialog";
-import {MatButtonModule} from "@angular/material/button";
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {MatButtonModule} from "@angular/material/button";
     ProfileComponent,
     ProfileRemoveAccountConfirmDialogComponent,
     DateIntervalPipe,
-    ReversePipe
+    ReversePipe,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

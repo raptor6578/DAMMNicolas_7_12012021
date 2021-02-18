@@ -12,6 +12,7 @@ export interface IUser {
   admin: boolean;
   createdAt: Date;
   updatedAt: Date;
+  lastConnection: Date;
   Profile?: IProfile;
 }
 
@@ -26,9 +27,9 @@ export interface ITokenData extends IUser {
 export class AuthService {
 
   connected$ = new BehaviorSubject<boolean>(false);
+  admin$ = new BehaviorSubject<boolean>(false);
   token: string;
   id: number;
-  admin: boolean;
   email: string;
   tokenIat: number;
   tokenExp: number;
@@ -46,7 +47,9 @@ export class AuthService {
     const tokenDecode = Base64.decode(splitToken[1]);
     const tokenData: ITokenData = JSON.parse(tokenDecode);
     this.id = tokenData.id;
-    this.admin = tokenData.admin;
+    if (tokenData.admin) {
+      this.admin$.next(true);
+    }
     this.email = tokenData.email;
     this.tokenIat = tokenData.iat;
     this.tokenExp = tokenData.exp;
@@ -115,12 +118,48 @@ export class AuthService {
     });
   }
 
+  getAllUsers(): Promise<IUser[]> {
+    return new Promise((resolve, reject) => {
+      if (!this.admin$.getValue()) {
+        reject({message: 'Vous n\'êtes pas autorisé à accéder à ce contenu.'});
+      }
+      this.http.get(environment.urlApi + '/api/auth/get-all-users/').subscribe(
+        (response: IUser[]) => {
+          resolve(response);
+        },
+        (response) => {
+          reject(response.error);
+        }
+      );
+    });
+  }
+
+  setAdmin(id: number, admin: number): Promise<{message: string}> {
+    return new Promise((resolve, reject) => {
+      if (!this.admin$.getValue()) {
+        reject({message: 'Vous n\'êtes pas autorisé à modifier les droits des utilisateurs.'});
+      }
+      this.http.post(environment.urlApi + '/api/auth/set-admin', {id, admin}).subscribe(
+        (response: {message: string}) => {
+          resolve(response);
+        },
+        (response) => {
+          reject(response.error);
+        }
+      );
+    });
+  }
+
   logout(): void {
     delete this.token;
     delete this.id;
-    delete this.admin;
+    delete this.email;
+    delete this.tokenIat;
+    delete this.tokenExp;
+    delete this.email;
     localStorage.removeItem('token');
     this.connected$.next(false);
+    this.admin$.next(false);
     this.router.navigate(['/']);
   }
 
@@ -130,10 +169,6 @@ export class AuthService {
 
   getId(): number {
     return this.id;
-  }
-
-  getAdmin(): boolean {
-    return this.admin;
   }
 
 }

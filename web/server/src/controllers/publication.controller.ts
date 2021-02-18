@@ -127,6 +127,42 @@ class ProfileController {
             });
     }
 
+    public deleteComment(req: express.Request, res: express.Response) {
+        if (!req.params.idPublication || !req.params.idComment) {
+            res.status(400);
+            return res.json({message: `Vous devez entrer l'id du commentaire et l'id de la publication.`});
+        }
+        CommentModel.findOne({where: {PublicationId: req.params.idPublication, id: req.params.idComment}})
+            .then(comment => {
+                if (!comment) {
+                    res.status(404);
+                    return res.json({message: 'Le commentaire est introuvable.'});
+                }
+                if (comment.UserId !== res.locals.UserId && !res.locals.admin) {
+                    res.status(403);
+                    return res.json({message: 'Vous n\'êtes pas autorisé à supprimer cette publication.'});
+                }
+                comment.destroy()
+                    .then(() => {
+                        const io = req.app.get('io');
+                        io.sockets.emit('deleteComment', {
+                            idPublication: req.params.idPublication,
+                            idComment: req.params.idComment
+                        });
+                        res.status(204);
+                        return res.send();
+                    })
+                    .catch((error) => {
+                        res.status(400);
+                        res.json({message: error});
+                    });
+            })
+            .catch((error) => {
+                res.status(500);
+                res.json({message: error});
+            });
+    }
+
     public addComment(req: express.Request, res: express.Response) {
         if (!req.body.id || !req.body.content) {
             res.status(400);
