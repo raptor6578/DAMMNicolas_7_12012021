@@ -1,7 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="916acb01-7b22-4e97-a9d4-d09734b5403f" name="Default Changelist" comment="" />
+    <list default="true" id="916acb01-7b22-4e97-a9d4-d09734b5403f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../db_data/dev/#ib_16384_0.dblwr" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/dev/#ib_16384_0.dblwr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../db_data/dev/binlog.index" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/dev/binlog.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../db_data/dev/groupomania/comments.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/dev/groupomania/comments.ibd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../db_data/dev/groupomania/profiles.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/dev/groupomania/profiles.ibd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../db_data/dev/groupomania/publications.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/dev/groupomania/publications.ibd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../db_data/dev/groupomania/users.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/dev/groupomania/users.ibd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../db_data/dev/groupomania/votes.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/dev/groupomania/votes.ibd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../db_data/dev/ib_buffer_pool" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/dev/ib_buffer_pool" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../db_data/dev/ib_logfile0" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/dev/ib_logfile0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../db_data/dev/ib_logfile1" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/dev/ib_logfile1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../db_data/dev/ibdata1" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/dev/ibdata1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../db_data/dev/mysql.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/dev/mysql.ibd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../db_data/dev/undo_001" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/dev/undo_001" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../db_data/dev/undo_002" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/dev/undo_002" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../docker-compose.dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../docker-compose.dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/controllers/auth.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/controllers/auth.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/controllers/profile.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/controllers/profile.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/controllers/publication.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/controllers/publication.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/routes/auth.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/routes/auth.route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/auth.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/auth.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/profile.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/profile.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/publication.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/publication.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/auth.route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/auth.route.ts" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +84,7 @@
       <workItem from="1612023460718" duration="26403000" />
       <workItem from="1612528222854" duration="17439000" />
       <workItem from="1613044985697" duration="5149000" />
-      <workItem from="1613240533813" duration="11298000" />
+      <workItem from="1613240533813" duration="14717000" />
     </task>
     <servers />
   </component>

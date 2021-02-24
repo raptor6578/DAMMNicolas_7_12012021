@@ -13,8 +13,8 @@ class AuthRoute {
         this.router.post('/signup', authController.signup);
         this.router.post('/login', authController.login);
         this.router.post('/set-admin', auth, admin, authController.setAdmin);
-        this.router.get('/get-all-users', authController.getAllUsers);
-        this.router.delete('/delete/:id', auth, admin, authController.delete);
+        this.router.get('/get-all-users', auth, admin, authController.getAllUsers);
+        this.router.delete('/delete/:id', auth, authController.delete);
     }
 }
 

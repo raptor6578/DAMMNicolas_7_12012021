@@ -84,7 +84,7 @@ class ProfileController {
                         io.sockets.emit('newPublication', data);
                     });
                 res.status(201);
-                res.json({message: `Votre publication a bien été enregistré.`});
+                res.json({message: `Votre publication a bien été enregistrée.`});
             })
             .catch((error) => {
                 res.status(400);

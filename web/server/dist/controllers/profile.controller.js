@@ -52,7 +52,7 @@ class ProfileController {
             profile.save()
                 .then(() => {
                 res.status(200);
-                return res.json({ message: 'Votre profil a bien été modifiée.' });
+                return res.json({ message: 'Votre profil a bien été modifié.' });
             })
                 .catch((error) => {
                 res.status(400);

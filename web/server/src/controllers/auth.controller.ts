@@ -66,7 +66,7 @@ class AuthController {
                         const token = jwt.sign(user.toJSON(), process.env.SECRET_JWT, {expiresIn: '24h'});
                         res.status(200);
                         res.json({token});
-                        user.lastConnection = new Date()
+                        user.lastConnection = new Date();
                         user.save().then()
                     })
                     .catch(error => {
@@ -89,17 +89,19 @@ class AuthController {
                     res.status(401);
                     return res.json({message: `Id introuvable dans la base de données.`});
                 }
-                if (user.id === res.locals.UserId || res.locals.admin) {
-                    user.destroy()
-                        .then(() => {
-                            res.status(204);
-                            return res.send();
-                        })
-                        .catch((error) => {
-                            res.status(400);
-                            res.json({message: error});
-                        });
+                if (user.id !== res.locals.UserId && !res.locals.admin) {
+                    res.status(403);
+                    return res.json({message: 'Vous n\'êtes pas autorisé à supprimer cet utilisateur.'});
                 }
+                user.destroy()
+                    .then(() => {
+                        res.status(204);
+                        return res.send();
+                    })
+                    .catch((error) => {
+                        res.status(400);
+                        res.json({message: error});
+                    });
             })
             .catch((error) => {
                 res.status(500);

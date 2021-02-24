@@ -36,7 +36,7 @@ services:
     working_dir: /app
     volumes:
       - ./web/client:/app
-    command: ./start.sh
+    command: npm start
     ports:
       - "4200:4200"
 
@@ -49,6 +49,6 @@ services:
     working_dir: /app
     volumes:
       - ./web/server:/app
-    command: ./start.sh
+    command: npm run dev
     ports:
       - "8888:8888"
