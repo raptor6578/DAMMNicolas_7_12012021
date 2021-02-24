@@ -15,7 +15,7 @@ class PublicationRoute {
     initializeRoutes() {
         this.router.get('/get-my-publications', auth_middleware_1.default, publication_controller_1.default.getMyPublications);
         this.router.post('/add-comment', auth_middleware_1.default, publication_controller_1.default.addComment);
-        this.router.get('/get-comment/:id/:offset/:limit', auth_middleware_1.default, publication_controller_1.default.getComment);
+        this.router.get('/get-comment/:id/:offset/:limit', publication_controller_1.default.getComment);
         this.router.post('/add-vote', auth_middleware_1.default, publication_controller_1.default.addVote);
         this.router.delete('/delete-comment/:idPublication/:idComment', auth_middleware_1.default, publication_controller_1.default.deleteComment);
         this.router.delete('/delete-vote/:id', auth_middleware_1.default, publication_controller_1.default.deleteVote);
