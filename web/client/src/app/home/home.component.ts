@@ -1,17 +1,18 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../services/auth.service';
 import {IComment, IPublication, IVote, PublicationService} from '../services/publication.service';
 import {NgForm} from '@angular/forms';
 import {SocketIoService} from '../services/socket-io.service';
 import {ProfileService} from '../services/profile.service';
 import {faTrashAlt} from '@fortawesome/free-solid-svg-icons';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.sass']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   connected: boolean;
   image: File;
@@ -23,6 +24,12 @@ export class HomeComponent implements OnInit {
   offsetComments: {};
   admin: boolean;
   faTrashAlt = faTrashAlt;
+  newPublication$: Subscription;
+  deletePublication$: Subscription;
+  deleteComment$: Subscription;
+  newComment$: Subscription;
+  addVote$: Subscription;
+  deleteVote$: Subscription;
 
   constructor(private auth: AuthService,
               private publication: PublicationService,
@@ -53,14 +60,17 @@ export class HomeComponent implements OnInit {
     this.initializeSocketIO();
   }
 
-  private initializeSocketIO(): void {
+  ngOnDestroy(): void {
+    this.destroySocketIO();
+  }
 
-    this.socket.on('newPublication').subscribe((data: IPublication) => {
+  private initializeSocketIO(): void {
+    this.newPublication$ = this.socket.on('newPublication').subscribe((data: IPublication) => {
       this.publications.unshift(data);
       this.offsetPublications++;
     });
 
-    this.socket.on('deletePublication').subscribe((data: {id: number}) => {
+    this.deletePublication$ = this.socket.on('deletePublication').subscribe((data: {id: number}) => {
       const indexPublication = this.publications.findIndex(publication => publication.id === Number(data.id));
       if (indexPublication !== -1) {
         this.publications.splice(indexPublication, 1);
@@ -68,19 +78,19 @@ export class HomeComponent implements OnInit {
       }
     });
 
-    this.socket.on('deleteComment').subscribe((data: {idPublication: number, idComment: number}) => {
+    this.deleteComment$ = this.socket.on('deleteComment').subscribe((data: {idPublication: number, idComment: number}) => {
       const indexPublication = this.publications.findIndex(publication => publication.id === Number(data.idPublication));
       if (indexPublication !== -1) {
         const indexComment = this.publications[indexPublication].Comment.findIndex(comment => comment.id === Number(data.idComment));
         if (indexComment !== -1) {
           this.publications[indexPublication].Comment.splice(indexComment, 1);
-          const idPublication = this.publications[indexPublication].id;
+          // const idPublication = this.publications[indexPublication].id;
           // this.offsetComments[idPublication]--;
         }
       }
     });
 
-    this.socket.on('newComment').subscribe((data: IComment) => {
+    this.newComment$ = this.socket.on('newComment').subscribe((data: IComment) => {
       const indexPublication = this.publications.findIndex(publication => publication.id === Number(data.PublicationId));
       if (indexPublication !== -1) {
         this.publications[indexPublication].Comment.push(data);
@@ -95,12 +105,12 @@ export class HomeComponent implements OnInit {
       }
     });
 
-    this.socket.on('addVote').subscribe((data: IVote) => {
+    this.addVote$ = this.socket.on('addVote').subscribe((data: IVote) => {
       const indexPublication = this.publications.findIndex(publication => publication.id === Number(data.PublicationId));
       this.publications[indexPublication].Vote.push(data);
     });
 
-    this.socket.on('deleteVote').subscribe((data: IVote) => {
+    this.deleteVote$ = this.socket.on('deleteVote').subscribe((data: IVote) => {
       const indexPublication = this.publications.findIndex(publication => publication.id === Number(data.PublicationId));
       if (indexPublication !== -1) {
         const indexVote = this.publications[indexPublication].Vote.findIndex(vote => vote.UserId === Number(data.UserId));
@@ -110,6 +120,15 @@ export class HomeComponent implements OnInit {
       }
     });
 
+  }
+
+  destroySocketIO(): void {
+    this.newPublication$.unsubscribe();
+    this.deletePublication$.unsubscribe();
+    this.deleteComment$.unsubscribe();
+    this.newComment$.unsubscribe();
+    this.addVote$.unsubscribe();
+    this.deleteVote$.unsubscribe();
   }
 
   loadPublications(): void {

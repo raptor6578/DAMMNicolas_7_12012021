@@ -452,30 +452,33 @@ class HomeComponent {
         this.loadPublications();
         this.initializeSocketIO();
     }
+    ngOnDestroy() {
+        this.destroySocketIO();
+    }
     initializeSocketIO() {
-        this.socket.on('newPublication').subscribe((data) => {
+        this.newPublication$ = this.socket.on('newPublication').subscribe((data) => {
             this.publications.unshift(data);
             this.offsetPublications++;
         });
-        this.socket.on('deletePublication').subscribe((data) => {
+        this.deletePublication$ = this.socket.on('deletePublication').subscribe((data) => {
             const indexPublication = this.publications.findIndex(publication => publication.id === Number(data.id));
             if (indexPublication !== -1) {
                 this.publications.splice(indexPublication, 1);
                 this.offsetPublications--;
             }
         });
-        this.socket.on('deleteComment').subscribe((data) => {
+        this.deleteComment$ = this.socket.on('deleteComment').subscribe((data) => {
             const indexPublication = this.publications.findIndex(publication => publication.id === Number(data.idPublication));
             if (indexPublication !== -1) {
                 const indexComment = this.publications[indexPublication].Comment.findIndex(comment => comment.id === Number(data.idComment));
                 if (indexComment !== -1) {
                     this.publications[indexPublication].Comment.splice(indexComment, 1);
-                    const idPublication = this.publications[indexPublication].id;
+                    // const idPublication = this.publications[indexPublication].id;
                     // this.offsetComments[idPublication]--;
                 }
             }
         });
-        this.socket.on('newComment').subscribe((data) => {
+        this.newComment$ = this.socket.on('newComment').subscribe((data) => {
             const indexPublication = this.publications.findIndex(publication => publication.id === Number(data.PublicationId));
             if (indexPublication !== -1) {
                 this.publications[indexPublication].Comment.push(data);
@@ -490,11 +493,11 @@ class HomeComponent {
                 }
             }
         });
-        this.socket.on('addVote').subscribe((data) => {
+        this.addVote$ = this.socket.on('addVote').subscribe((data) => {
             const indexPublication = this.publications.findIndex(publication => publication.id === Number(data.PublicationId));
             this.publications[indexPublication].Vote.push(data);
         });
-        this.socket.on('deleteVote').subscribe((data) => {
+        this.deleteVote$ = this.socket.on('deleteVote').subscribe((data) => {
             const indexPublication = this.publications.findIndex(publication => publication.id === Number(data.PublicationId));
             if (indexPublication !== -1) {
                 const indexVote = this.publications[indexPublication].Vote.findIndex(vote => vote.UserId === Number(data.UserId));
@@ -503,6 +506,14 @@ class HomeComponent {
                 }
             }
         });
+    }
+    destroySocketIO() {
+        this.newPublication$.unsubscribe();
+        this.deletePublication$.unsubscribe();
+        this.deleteComment$.unsubscribe();
+        this.newComment$.unsubscribe();
+        this.addVote$.unsubscribe();
+        this.deleteVote$.unsubscribe();
     }
     loadPublications() {
         this.publication.getPublications(this.offsetPublications, this.limitPublications)

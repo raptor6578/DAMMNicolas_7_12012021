@@ -16,8 +16,8 @@
       <change beforePath="$PROJECT_DIR$/../../db_data/dev/mysql.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/dev/mysql.ibd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../db_data/dev/undo_001" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/dev/undo_001" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../db_data/dev/undo_002" beforeDir="false" afterPath="$PROJECT_DIR$/../../db_data/dev/undo_002" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/home/home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/home/home.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/publication.route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/publication.route.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -76,7 +76,7 @@
       <workItem from="1612023460718" duration="26403000" />
       <workItem from="1612528222854" duration="17439000" />
       <workItem from="1613044985697" duration="5149000" />
-      <workItem from="1613240533813" duration="15816000" />
+      <workItem from="1613240533813" duration="17531000" />
     </task>
     <servers />
   </component>
