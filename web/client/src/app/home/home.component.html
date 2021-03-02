@@ -1,7 +1,7 @@
 <h1>Réseau Groupomania</h1>
 <div class="home">
   <form *ngIf="connected" (ngSubmit)="onSubmitPublication(f)" #f="ngForm">
-    <h3>Publier sur le réseau Groupomania</h3>
+    <h2>Publier sur le réseau Groupomania</h2>
     <label for="content">Ecrivez quelque chose</label>
     <textarea name="content" id="content" ngModel></textarea>
     <label for="image" class="label-image">Ajouter une image</label>
@@ -42,7 +42,7 @@
         </div>
         <form *ngIf="connected" (ngSubmit)="onSubmitComment(f)" #f="ngForm">
           <input type="hidden" id="publicationId" name="publicationId" [ngModel]="publication.id" />
-          <input type="text" name="comment" [id]="'input-comment-' + publication.id" placeholder="Écrivez un commentaire..." ngModel />
+          <label>Vous pouvez commenter la publication <input type="text" name="comment" [id]="'input-comment-' + publication.id" placeholder="Écrivez un commentaire..." ngModel /></label>
         </form>
       </div>
     </div>

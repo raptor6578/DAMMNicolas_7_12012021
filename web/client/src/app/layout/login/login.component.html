@@ -1,7 +1,7 @@
 <div *ngIf="!connected" class="login">
   <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-    <input type="email" placeholder="Votre email" name="email" ngModel />
-    <input type="password" placeholder="Votre mot de passe" name="password" ngModel />
+    <label title="Votre email">→ <input type="email" placeholder="Votre email" name="email" ngModel /></label>
+    <label title="Votre mot de passe">→ <input type="password" placeholder="Votre mot de passe" name="password" ngModel /></label>
     <button class="login-button">Connexion</button>
   </form>
 </div>
@@ -14,8 +14,8 @@
 <div *ngIf="!connected && loginMobile" class="login-mobile">
   <div class="arrow"></div>
   <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-    <input type="email" placeholder="Votre email" name="email" ngModel />
-    <input type="password" placeholder="Votre mot de passe" name="password" ngModel />
+    <label><input type="email" placeholder="Votre email" name="email"  id="email" ngModel /></label>
+    <label><input type="password" placeholder="Votre mot de passe" name="password" id="password" ngModel /></label>
     <button class="login-button">Connexion</button>
   </form>
 </div>
